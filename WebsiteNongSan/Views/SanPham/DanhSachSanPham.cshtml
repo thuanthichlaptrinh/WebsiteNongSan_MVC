@@ -1,0 +1,168 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.SanPham>
+
+@{
+    ViewBag.Title = "DanhSachSanPham";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@{
+    int index = 0;
+    int lenLoai = ViewBag.dsl.Count;
+    int i = 0;
+}
+
+<div class="row mt-2 bg-white mb-13-t pb-12-t row-pro" style="margin-left: -34px; margin-right: -24px">
+    <div class="title-banner-wrapper">
+        <div class="triangle-left"></div>
+        <a class="title-banner">
+            @if (ViewBag.dsl != null)
+            {
+                <span>@ViewBag.dsl[index].TenLoaiSP</span>
+            }
+        </a>
+        <div class="triangle-right"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.LoaiSanPham.IDLoaiSP == ViewBag.dsl[index].IDLoaiSP && i < 4)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card" style="border: 1px solid #d8e1f9">
+                    <a href="~/SanPham/ChiTietSanPham/@item.IDSanPham">
+                        <img src="~/Content/Assets/Images/@item.HinhAnh" class="w-100" alt="" />
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title fw-400 txt-gray">Ức gà có xương</p>
+                        <p class="card-title">
+                            <span class="fw-700">28.350đ</span>
+                            <span class="txt-gray fs-13-t">/300g</span>
+                        </p>
+                        <div class="container-ThemVGio">
+                            <a href="~/DatHang/ThemVaoGioHang/@item.IDSanPham" class="btn btn-ThemVaoGio text-white mx-auto fw-500 d-block">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            i++;
+        }
+        else
+        {
+            i = 0;
+            index++;
+            break;
+        }
+    }
+
+    <a href=""
+       class="text-center mt-2 d-flex align-items-center justify-content-center"
+       style="text-decoration: none; color: rgb(81 87 100/1); font-size: 14px; padding: 4px 8px; padding-bottom: 0">
+        <span>Xem thêm</span> <span style="font-weight: 500; margin-left: 4px">Rau, củ, nắm</span>
+        <i class="ri-arrow-right-s-line" style="font-size: 20px; margin-bottom: -5px"></i>
+    </a>
+</div>
+
+<div class="row mt-2 bg-white mb-13-t pb-12-t row-pro" style="margin-left: -34px; margin-right: -24px">
+    <div class="title-banner-wrapper">
+        <div class="triangle-left"></div>
+        <a class="title-banner">
+            @if (ViewBag.dsl != null)
+            {
+                <span>@ViewBag.dsl[index].TenLoaiSP</span>
+            }
+        </a>
+        <div class="triangle-right"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.LoaiSanPham.IDLoaiSP == ViewBag.dsl[index].IDLoaiSP && i < 4)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card" style="border: 1px solid #d8e1f9">
+                    <a href="">
+                        <img src="~/Content/Assets/Images/@item.HinhAnh" class="w-100" alt="" />
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title fw-400 txt-gray">Ức gà có xương</p>
+                        <p class="card-title">
+                            <span class="fw-700">28.350đ</span>
+                            <span class="txt-gray fs-13-t">/@item.DonViTinh</span>
+                        </p>
+                        <div class="container-ThemVGio">
+                            <a href="#" class="btn btn-ThemVaoGio text-white mx-auto fw-500 d-block">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            i++;
+        }
+        else
+        {
+            i = 0;
+            index++;
+            break;
+        }
+    }
+
+    <a href=""
+       class="text-center mt-2 d-flex align-items-center justify-content-center"
+       style="text-decoration: none; color: rgb(81 87 100/1); font-size: 14px; padding: 4px 8px; padding-bottom: 0">
+        <span>Xem thêm</span> <span style="font-weight: 500; margin-left: 4px">Rau, củ, nắm</span>
+        <i class="ri-arrow-right-s-line" style="font-size: 20px; margin-bottom: -5px"></i>
+    </a>
+</div>
+
+<div class="row mt-2 bg-white mb-13-t pb-12-t row-pro" style="margin-left: -34px; margin-right: -24px">
+    <div class="title-banner-wrapper">
+        <div class="triangle-left"></div>
+        <a class="title-banner">
+            @if (ViewBag.dsl != null)
+            {
+                <span>@ViewBag.dsl[index].TenLoaiSP</span>
+            }
+        </a>
+        <div class="triangle-right"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.LoaiSanPham.IDLoaiSP == ViewBag.dsl[index].IDLoaiSP && i < 4)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card" style="border: 1px solid #d8e1f9">
+                    <a href="">
+                        <img src="~/Content/Assets/Images/@item.HinhAnh" class="w-100" alt="" />
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title fw-400 txt-gray">Ức gà có xương</p>
+                        <p class="card-title">
+                            <span class="fw-700">28.350đ</span>
+                            <span class="txt-gray fs-13-t">/300g</span>
+                        </p>
+                        <div class="container-ThemVGio">
+                            <a href="#" class="btn btn-ThemVaoGio text-white mx-auto fw-500 d-block">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            i++;
+        }
+        else
+        {
+            i = 0;
+            index++;
+            break;
+        }
+    }
+
+    <a href=""
+       class="text-center mt-2 d-flex align-items-center justify-content-center"
+       style="text-decoration: none; color: rgb(81 87 100/1); font-size: 14px; padding: 4px 8px; padding-bottom: 0">
+        <span>Xem thêm</span> <span style="font-weight: 500; margin-left: 4px">Rau, củ, nắm</span>
+        <i class="ri-arrow-right-s-line" style="font-size: 20px; margin-bottom: -5px"></i>
+    </a>
+</div>

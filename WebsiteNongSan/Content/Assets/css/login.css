@@ -1,0 +1,216 @@
+/*https://bytewebster.com/*/
+/*https://bytewebster.com/*/
+/*https://bytewebster.com/*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css");
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ddd;
+    font-size: 14px;
+}
+
+.con {
+    background-color: #fff;
+    width: 760px;
+    max-width: 100vw;
+    height: 480px;
+    position: relative;
+    overflow-x: hidden;
+}
+.con .forms-con {
+    position: relative;
+    width: 50%;
+    text-align: center;
+}
+.con .forms-con .form-cl {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 480px;
+    transition: all 0.5s ease-in;
+}
+.con .forms-con .form-cl h2 {
+    font-size: 2rem;
+}
+.con .forms-con .form-cl form {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 30px;
+}
+.con .forms-con .form-cl form input {
+    margin: 10px 0px;
+    border: none;
+    padding: 15px;
+    background-color: #efefef;
+    border-radius: 5px;
+}
+.con .forms-con .form-cl form button {
+    border: none;
+    padding: 20px;
+    margin-top: 5px;
+    background-color: #059669;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+.con .forms-con .form-cl form button:focus {
+    outline: none;
+}
+.con .forms-con .form-cl span {
+    margin: 10px 0px;
+}
+.con .forms-con .form-cl .socials i {
+    margin: 0 5px;
+    color: #fff;
+    border-radius: 50%;
+}
+.con .forms-con .form-cl .socials .fa-facebook-f {
+    padding: 5px 8px;
+    background-color: #3b5998;
+}
+.con .forms-con .form-cl .socials .fa-google-plus-g {
+    padding: 5px 4px;
+    background-color: #db4a39;
+}
+.con .forms-con .form-cl .socials .fa-linkedin-in {
+    padding: 5px 6px;
+    background-color: #0e76a8;
+}
+.con .forms-con .form-cl.signup-form {
+    opacity: 0;
+    z-index: 1;
+    left: 200%;
+}
+.con .forms-con .form-cl.signin-form {
+    opacity: 1;
+    z-index: 2;
+    left: 0%;
+}
+.con .intros-con {
+    position: relative;
+    left: 50%;
+    width: 50%;
+    text-align: center;
+}
+.con .intros-con .intro-control {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 480px;
+    color: #fff;
+    background: linear-gradient(170deg, #34d399, #059669);
+    transition: all 0.5s ease-in;
+}
+.con .intros-con .intro-control .intro-control__inner {
+    margin: 0px 30px;
+}
+.con .intros-con .intro-control button {
+    border: none;
+    padding: 15px 30px;
+    background-color: #10b981;
+    border-radius: 50px;
+    color: #fff;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+.con .intros-con .intro-control button:focus,
+.con .intros-con .intro-control button:hover {
+    outline: none;
+    background-color: #059669;
+}
+.con .intros-con .intro-control h3,
+.con .intros-con .intro-control p {
+    margin: 10px 0px;
+}
+.con .intros-con .intro-control.signin-intro {
+    opacity: 1;
+    z-index: 2;
+}
+.con .intros-con .intro-control.signup-intro {
+    opacity: 0;
+    z-index: 1;
+}
+
+.change .forms-con .form-cl.signup-form {
+    opacity: 1;
+    z-index: 2;
+    transform: translateX(-100%);
+}
+.change .forms-con .form-cl.signup-form button {
+    background-color: #2563eb !important;
+}
+.change .forms-con .form-cl.signin-form {
+    opacity: 0;
+    z-index: 1;
+    transform: translateX(-100%);
+}
+.change .intros-con .intro-control {
+    transform: translateX(-100%);
+    background: linear-gradient(170deg, #3b82f6, #2563eb);
+}
+.change .intros-con .intro-control #signin-btn {
+    background-color: #2563eb;
+}
+.change .intros-con .intro-control.signin-intro {
+    opacity: 0;
+    z-index: 1;
+}
+.change .intros-con .intro-control.signup-intro {
+    opacity: 1;
+    z-index: 2;
+}
+
+@media screen and (max-width: 480px) {
+    .con {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .con .forms-con {
+        order: 2;
+        width: 100%;
+        height: 50vh;
+    }
+    .con .forms-con .form-cl {
+        position: absolute;
+        height: 50vh;
+    }
+    .con .forms-con .form-cl.signup-form {
+        left: 0%;
+        margin-top: 70px;
+    }
+    .con .intros-con {
+        order: 1;
+        width: 100%;
+        left: 0%;
+        height: 40vh;
+    }
+    .con .intros-con .intro-control {
+        position: absolute;
+        height: 40vh;
+    }
+
+    .change .forms-con .form-cl.signup-form {
+        transform: translateX(0%);
+    }
+    .change .forms-con .form-cl.signin-form {
+        transform: translateX(0%);
+    }
+    .change .intros-con .intro-control {
+        transform: translateX(0%);
+    }
+}

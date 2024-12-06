@@ -1,0 +1,67 @@
+﻿@model WebsiteNongSan.Models.DonHang
+
+@{
+    ViewBag.Title = "ChiTietDatHang";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<main class="container bg-white" style="margin-top: var(--header-height); width: 65%; min-height: 90vh">
+    @if (ViewBag.Erorr != null)
+    {
+        <span>ViewBag.Erorr</span>
+    }
+    <div class="row">
+        <div class="d-flex align-items-center justify-content-center p-4">
+            <img src="~/Content/Assets/Images/checked.png" alt="" />
+            <h3 class="text-success mb-0" style="margin-left: 8px">Đặt hàng thành công</h3>
+        </div>
+    </div>
+    <div class="row p-3" style="padding-top: 0 !important">
+        <div style="border-radius: 4px; padding: 16px 24px; background-color: #eceff7">
+            <div class="d-flex align-items-center mb-2">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Người nhận:</div>
+                <span style="font-size: 17px">@Model.NguoiDung.TenNguoiDung</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Số điện thoại:</div>
+                <span style="font-size: 17px">@Model.NguoiDung.SDT</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Địa chỉ:</div>
+                <span style="font-size: 17px">@Model.NguoiDung.DiaChi</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Giao lúc:</div>
+                <span style="font-size: 17px">@Model.NgayGiao</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Thanh toán:</div>
+                <span style="font-size: 17px">@(ViewBag.ThanhToan.PhuongThuc == "cod" ? "Thanh toán bằng tiền mặt" : "Thanh toán bằng thẻ ngân hàng")</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <div style="width: 120px; margin-right: 14px; color: #999; font-weight: 500; font-size: 17px">Tổng tiền:</div>
+                <span style="font-size: 17px; font-weight: 500">@String.Format("{0:0,0}đ", ViewBag.ThanhToan.TongTienThanhToan)</span>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="d-flex align-items-center justify-content-center" style="gap: 8px">
+            <a href="~/SanPham/Index" class="btn-t" style="width: 200px; text-align: center; text-decoration: none; padding: 15px; border: 1px solid green; border-radius: 4px; color: green">Tiếp thục mua hàng</a>
+            <a href="~/DatHang/ThongTinThanhToan" class="btn-t d-flex align-items-center" style="width: 220px; text-align: center; text-decoration: none; padding: 6px; border: 1px solid green; border-radius: 4px">
+                <div class="px-2">
+                    <img src="~/Content/Assets/Images/pencil1.png" alt="" />
+                </div>
+                <div class="d-flex align-items-center" style="flex-direction: column">
+                    <span style="font-weight: 500; color: green">Xem / Sửa đơn hàng</span>
+                    <span style="color: #999; font-size: 13px">Thêm/bớt SP, Đổi địa chỉ...</span>
+                </div>
+            </a>
+        </div>
+        <a class="d-flex align-items-center justify-content-center mt-3 huyDon" style="gap: 8px; cursor: pointer; text-decoration: none">
+            <i class="ri-close-line" style="color: white; width: 22px; height: 22px; background-color: #a7abb8; border-radius: 50%; text-align: center"></i>
+            <span style="color: #a7abb8; font-weight: 500; font-size: 17px">Hủy đơn hàng</span>
+        </a>
+    </div>
+</main>
+
+

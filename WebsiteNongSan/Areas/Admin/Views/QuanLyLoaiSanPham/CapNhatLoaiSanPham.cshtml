@@ -1,0 +1,58 @@
+﻿@model WebsiteNongSan.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "CapNhatLoaiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý người dùng</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="#">Home</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý loại sản phẩm</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Cập nhật loại sản phẩm</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h6>Cập nhật loại sản phẩm</h6>
+        </div>
+        <div class="table-wrapper" style="background-color: #fff; padding: 18px">
+            @using (Html.BeginForm("CapNhatLoaiSanPham", "QuanLyLoaiSanPham", FormMethod.Post, new { enctype = "multipart/form-data", style = "display: flex" }))
+            {
+                <div style="width: 100%; ">
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.TenLoaiSP)
+                        @Html.TextBoxFor(model => model.TenLoaiSP, new { placeholder = "Nhập địa chỉ", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TenLoaiSP, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="display: flex">
+                        <button type="submit" style="width: 10%; padding: 10px; margin-top: 20px; background-color: #1c75e7; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px">
+                            Cập nhật
+                        </button>
+                        <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham" class="button" style="text-align: center; width: 10%; padding: 10px; margin-top: 20px; background-color: #fc3b56; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px; margin-left: 8px ">Hủy</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    input, select, .form-control {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #bebebe;
+        padding: 12px;
+        margin-top: 8px;
+    }
+
+    button:hover, .button:hover {
+        opacity: 0.8;
+    }
+</style>
+

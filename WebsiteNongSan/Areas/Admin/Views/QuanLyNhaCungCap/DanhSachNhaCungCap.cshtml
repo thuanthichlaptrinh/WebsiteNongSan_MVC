@@ -1,0 +1,115 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.NhaCungCap>
+
+@{
+    ViewBag.Title = "DanhSachNhaCungCap";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý nhà cung cấp</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/Index">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý nhà cung cấp</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Danh sách nhà cung cấp</a></li>
+    </ul>
+</div>
+
+<div style="margin-top: 20px;">
+    <form action="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap" method="get" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Tìm kiếm -->
+            <input type="search" name="Search" value="@ViewBag.Search" placeholder="Nhập từ khóa..." style="padding: 8px 12px; width: 340px; border: 1px solid #cfcfcf; border-radius: 4px; height: 37px; box-sizing: border-box; font-size: 15px;" />
+
+            <!-- Sắp xếp theo giá -->
+            <select name="SortName" style="padding: 6px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Xếp theo tên</option>
+                <option value="tang" @(ViewBag.SortName == "tang" ? "selected" : "")>Tên từ A-Z</option>
+                <option value="giam" @(ViewBag.SortName == "giam" ? "selected" : "")>Tên từ Z-A</option>
+            </select>
+
+            <!-- Nút làm mới -->
+            <button type="submit" style="background-color: #1472ea; color: #557164; color:white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; height: 36px; cursor: pointer; ">
+                <i class="fa-solid fa-arrow-rotate-right" style="font-size: 13px;"></i>
+                <span style="font-weight: 500; margin-left: 6px;">Làm mới</span>
+            </button>
+        </div>
+
+        <!-- Nút thêm mới -->
+        <div>
+            <a href="~/Admin/QuanLyNhaCungCap/ThemNhaCungCap" style="padding: 8px 16px; background-color: #1472ea; color: white; border-radius: 4px; font-size: 15px; height: 40px; text-decoration: none;">
+                <i class="fa-solid fa-plus"></i>
+                <span style="margin-left: 6px; font-weight: 500">Thêm mới</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="card">
+        @*<div class="card-header">
+                <h6 >DANH SÁCH TÀI KHOẢN</h6>
+            </div>*@
+        <div class="table-wrapper">
+            <table class="authors-table">
+                <thead>
+                    <tr style="background-color: #D3D3D3">
+                        <th style="color: black">Mã</th>
+                        <th style="color: black">Tên nhà cung cấp</th>
+                        <th style="color: black">Số điện thoại</th>
+                        <th style="color: black">Email</th>
+                        <th style="color: black">Địa chỉ</th>
+                        <th style="color: black">Ghi chú</th>
+                        <th style="color: black">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <small style="font-size: 13px">@item.IDNhaCungCap</small>
+                            </td>
+                            <td>
+                                <small style="font-size: 13px">@item.TenNhaCungCap</small>
+                            </td>
+                            <td>
+                                <small style="font-size: 13px">@item.SDT</small>
+                            </td>
+                            <td>
+                                <small style="font-size: 13px">@item.Email</small>
+                            </td>
+                            <td>
+                                <small style="font-size: 13px">
+                                    @(item.DiaChi.Length > 50 ? item.DiaChi.Substring(0, 50) + "..." : item.DiaChi)
+                                </small>
+                            </td>
+                            <td>
+                                <small style="font-size: 13px">
+                                    @(string.IsNullOrEmpty(item.GhiChu) ? "" : (item.GhiChu.Length > 30 ? item.GhiChu.Substring(0, 30) + "..." : item.GhiChu))
+                                </small>
+                            </td>
+                            <td>
+                                <a href="~/Admin/QuanLyNhaCungCap/CapNhatNhaCungCap/@item.IDNhaCungCap" class="edit-link"><i class="fa-solid fa-user-pen"></i></a>
+                                <a href="~/Admin/QuanLyNhaCungCap/ChiTietNhaCungCap/@item.IDNhaCungCap" class="info-link"><i class="fa-solid fa-circle-info" style="font-size: 19px; color: #28a745"></i></a>
+                                <a href="~/Admin/QuanLyNhaCungCap/XoaNhaCungCap/@item.IDNhaCungCap" class="delete-link"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Phân trang -->
+<div class="custom-pagination">
+    <a href="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap?search=@ViewBag.Search&SortName=@ViewBag.SortName&page=1" class="custom-button">&laquo;</a>
+    @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+    {
+        var cssClass = i == ViewBag.Page ? "custom-button active" : "custom-button";
+        <a href="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap?search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@i" class="@cssClass">@i</a>
+    }
+    <a href="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap?search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@ViewBag.NoOfPages" class="custom-button">&raquo;</a>
+</div>

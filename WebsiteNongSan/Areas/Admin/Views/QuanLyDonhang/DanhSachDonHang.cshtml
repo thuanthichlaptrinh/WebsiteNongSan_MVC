@@ -1,0 +1,139 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.DonHang>
+
+@{
+    ViewBag.Title = "DanhSachDonHang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý đơn hàng</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="#">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý đơn hàng</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Danh sách đơn hàng</a></li>
+    </ul>
+</div>
+
+<div style="margin-top: 20px;">
+    <form action="~/Admin/QuanLyDonHang/DanhSachDonHang" method="get" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Tìm kiếm -->
+            <input type="search" name="Search" value="@ViewBag.Search" placeholder="Nhập từ khóa..." style="padding: 8px 12px; width: 340px; border: 1px solid #cfcfcf; border-radius: 4px; height: 37px; box-sizing: border-box; font-size: 15px;" />
+
+            <!-- Sắp xếp theo trạng thái -->
+            <select name="SortTrangThai" style="padding: 6px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Lọc theo trạng thái</option>
+                <option value="dangXuLy" @(ViewBag.SortName == "dangXuLy" ? "selected" : "")>Đang xử lý</option>
+                <option value="choGiaoHang" @(ViewBag.SortName == "choGiaoHang" ? "selected" : "")>Chờ giao hàng</option>
+                <option value="giaoThanhCong" @(ViewBag.SortName == "giaoThanhCong" ? "selected" : "")>Giao thành công</option>
+                <option value="daHuy" @(ViewBag.SortName == "daHuy" ? "selected" : "")>Đã hủy</option>
+            </select>
+
+            <!-- Nút làm mới -->
+            <button type="submit" style="background-color: #1472ea; color: #557164; color:white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; height: 36px; cursor: pointer; ">
+                <i class="fa-solid fa-arrow-rotate-right" style="font-size: 13px;"></i>
+                <span style="font-weight: 500; margin-left: 6px;">Làm mới</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper">
+            <table class="authors-table">
+                <thead>
+                    <tr style="background-color: #D3D3D3">
+                        <th style="color: #2d3436">Mã đơn hàng</th>
+                        <th style="color: #2d3436">Họ tên</th>
+                        <th style="color: #2d3436">Địa chỉ</th>
+                        <th style="color: #2d3436">Trạng thái</th>
+                        <th style="color: #2d3436">Tổng tiền</th>
+                        <th style="color: #2d3436; text-align: center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="tableProduct">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDDonHang</td>
+                            <td>@item.NguoiDung.TenNguoiDung</td>
+                            <td>@item.DiaChi</td>
+                            @if (item.TrangThai == "Đang xử lý")
+                            {
+                                <td style="color: red; font-weight: 500">Đang xử lý</td>
+                            }
+                            else if (item.TrangThai == "Chờ giao hàng")
+                            {
+                                <td style="color: orange; font-weight: 500">Chờ giao hàng</td>
+                            }
+                            else
+                            {
+                                <td style="color: forestgreen; font-weight: 500">Giao thành công</td>
+                            }
+                            <td>@String.Format("{0:0,0}đ", item.TongTien)</td>
+                            <td style="display: flex; align-items: center; justify-content: center">
+                                <a href="~/Admin/QuanLyDonHang/ChiTietDonHang/@item.IDDonHang" style="border: 1px solid blue; color: blue; padding: 4px 6px; border-radius: 4px; cursor: pointer">
+                                    Xem chi tiết
+                                </a>
+                                <form action="~/Admin/QuanLyDonHang/XacNhanDonHang/@item.IDDonHang" method="post" onsubmit="return confirmAction()" style="margin-top: 0px; margin-left: 6px">
+                                    <input type="submit" value="Xác nhận đã giao" style="border: 1px solid red; color: red; padding: 4px 6px; border-radius: 4px; background-color: white; cursor: pointer" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Phân trang -->
+<div class="custom-pagination">
+    <a href="~/Admin/QuanLyDonHang/DanhSachDonHang?Search=@ViewBag.Search&SortTrangThai=@ViewBag.SortTrangThai&page=1" class="custom-button">&laquo;</a>
+    @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+    {
+        var cssClass = i == ViewBag.Page ? "custom-button active" : "custom-button";
+        <a href="~/Admin/QuanLyDonHang/DanhSachDonHang?Search=@ViewBag.Search&SortTrangThai=@ViewBag.SortTrangThai&page=@i" class="@cssClass">@i</a>
+    }
+    <a href="~/Admin/QuanLyDonHang/DanhSachDonHang?Search=@ViewBag.Search&SortTrangThai=@ViewBag.SortTrangThai&page=@ViewBag.NoOfPages" class="custom-button">&raquo;</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const countdownElements = document.querySelectorAll(".countdown");
+
+        countdownElements.forEach(function (element) {
+            const endDate = new Date(element.getAttribute("data-enddate"));
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeDiff = endDate - now;
+
+                if (timeDiff <= 0) {
+                    element.textContent = "Hết hiệu lực";
+                } else {
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                    element.textContent = `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+                }
+            }
+
+            updateCountdown(); // Cập nhật lần đầu ngay khi tải trang
+            setInterval(updateCountdown, 1000); // Cập nhật mỗi giây
+        });
+    });
+
+    function confirmAction() {
+        return confirm("Bạn có chắc chắn muốn xác nhận đơn hàng này đã giao?");
+    };
+</script>
+
+
+
+

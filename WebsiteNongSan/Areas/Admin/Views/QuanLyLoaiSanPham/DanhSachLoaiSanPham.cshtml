@@ -1,0 +1,106 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.LoaiSanPham>
+
+@{
+    ViewBag.Title = "Danh sách loại sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý loại sản phẩm</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="#">Home</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý loại sản phẩm</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Danh sách loại sản phẩm</a></li>
+    </ul>
+</div>
+
+<div style="margin-top: 20px;">
+    <form action="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham" method="get" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Tìm kiếm -->
+            <input type="search" name="Search" value="@ViewBag.Search" placeholder="Nhập từ khóa..." style="padding: 8px 12px; width: 340px; border: 1px solid #cfcfcf; border-radius: 4px; height: 37px; box-sizing: border-box; font-size: 15px;" />
+
+            <!-- Sắp xếp theo tiêu chí -->
+            <select name="SortName" style="padding: 8px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Xếp theo tiêu chí</option>
+                <option value="tentang" @(ViewBag.SortName == "tentang" ? "selected" : "")>Tên từ A-Z</option>
+                <option value="tengiam" @(ViewBag.SortName == "tengiam" ? "selected" : "")>Tên từ Z-A</option>
+            </select>
+
+            <!-- Nút làm mới -->
+            <button type="submit" style="background-color: #1c75e7; border: none; padding: 6px 12px; border-radius: 4px; font-size: 15px; color: white; height: 37px; cursor: pointer;">
+                <i class="fa-solid fa-arrow-rotate-right" style="font-size: 13px;"></i>
+                <span style="font-weight: 500;">Làm mới</span>
+            </button>
+        </div>
+
+        <!-- Nút thêm mới -->
+        <div>
+            <a href="~/Admin/QuanLyLoaiSanPham/ThemLoaiSanPham" style="background-color: #1472ea; color: #557164; color:white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; height: 36px; cursor: pointer;">
+                <i class="fa-solid fa-plus"></i>
+                <span style="margin-left: 6px;">Thêm mới</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper">
+            <table class="authors-table">
+                <thead>
+                    <tr style="background-color: #D3D3D3">
+                        <th>Mã loại sản phẩm</th>
+                        <th>Tên loại sản phẩm</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="tableProduct">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDLoaiSP</td>
+                            <td>
+                                <div class="author-info">
+                                    <div>
+                                        <small style="font-size: 14px">@item.TenLoaiSP</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="~/Admin/QuanLyLoaiSanPham/CapNhatLoaiSanPham/@item.IDLoaiSP" class="edit-link"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="~/Admin/QuanLyLoaiSanPham/XoaLoaiSanPham/@item.IDLoaiSP" class="delete-link"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Phân trang -->
+<div class="custom-pagination">
+    <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=1"
+       class="custom-button">&laquo;</a>
+    @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+    {
+        if (i == ViewBag.Page)
+        {
+            <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@i"
+               class="custom-button active">@i</a>
+        }
+        else
+        {
+            <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@i"
+               class="custom-button">@i</a>
+        }
+    }
+    <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@ViewBag.NoOfPages"
+       class="custom-button">&raquo;</a>
+</div>
+
+

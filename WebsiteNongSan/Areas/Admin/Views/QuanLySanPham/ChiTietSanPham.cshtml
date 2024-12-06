@@ -1,0 +1,133 @@
+﻿@model WebsiteNongSan.Models.SanPham
+
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h1 class="title">Quản lý sản phẩm</h1>
+<ul class="breadcrumbs">
+    <li><a href="#">Trang chủ</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Quản lý sản phẩm</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Chi tiết sản phẩm</a></li>
+</ul>
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper" style="display: flex; background-color: white; width: 100%">
+            <div style="width: 35%; padding: 20px 0">
+                <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+                    <img src="~/Content/HinhAnh/@Model.HinhAnh" alt="@Model.TenSanPham"
+                         style=" width: 260px; height: 260px; object-fit: cover; " />
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px">
+                    <a href="~/Admin/QuanLySanPham/CapNhatSanPham/@Model.IDSanPham">Cập nhật</a>
+                    <span style="margin: 0 4px;">|</span>
+                    <a href="~/Admin/QuanLySanPham/DanhSachSanPham">Trở về</a>
+                </div>
+            </div>
+            <div style="width: 65%; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 10px">
+                <div style="width: 100%;">
+                    <div class="card-header">
+                        <h6>THÔNG TIN SẢN PHẨM</h6>
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; justify-content: space-around">
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Mã sản phẩm: <span>@Model.IDSanPham</span></th>
+                            </tr>
+                            <tr>
+                                <th>Tên sản phẩm: <span>@Model.TenSanPham</span></th>
+                            </tr>
+                            <tr>
+                                <th>Giá bán: <span>@String.Format("{0:0,0}", Model.Gia) đ</span></th>
+                            </tr>
+                            <tr>
+                                <th>Loại sản phẩm: <span>@Model.LoaiSanPham.TenLoaiSP</span></th>
+                            </tr>
+                            <tr>
+                                <th>Đơn vị tính: <span>@Model.DonViTinh</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>
+                                    Trạng thái:
+                                    @if (Model.TrangThai == true)
+                                    {
+                                        <span>Còn kinh doanh</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Ngừng kinh doanh</span>
+                                    }
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Số lượng tồn: <span>@Model.SoLuongTon</span></th>
+                            </tr>
+                            <tr>
+                                <th>Xuất xứ: <span>@Model.NhaCungCap.TenNhaCungCap</span></th>
+                            </tr>
+                            <tr>
+                                <th>Ngày tạo: <span>@String.Format("{0:dd/MM/yyyy}", Model.NgayTao)</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; justify-content: space-around">
+                    <table class="authors-table">
+                        <tr>
+                            <th>Mô tả: <span style="font-size: 14px">@Html.Raw(Model.MoTa)</span></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    th {
+        font-size: 18px !important;
+        color: black !important;
+        border-bottom: none !important;
+    }
+
+    span {
+        color: #555;
+    }
+
+    .btn {
+        display: block;
+        width: 120px;
+        padding: 8px 36px;
+        margin-left: 4px;
+        color: white;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+    .btn-danger {
+        background-color: #f93b57;
+        border: 1px solid #f93b57;
+    }
+
+    .btn-primary {
+        margin-left: 10px;
+        background-color: #1c75e7;
+    }
+</style>
+
+
+

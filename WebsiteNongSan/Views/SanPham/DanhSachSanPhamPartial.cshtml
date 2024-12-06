@@ -1,0 +1,123 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.SanPham>
+
+@{
+    var dsl = ViewBag.dsl as List<WebsiteNongSan.Models.LoaiSanPham>;
+    int maxItemsPerRow = 4; // Số sản phẩm tối đa hiển thị trên mỗi dòng
+}
+
+@{
+    bool TraVeIDKhuyenMai(int id)
+    {
+        var x = Model.FirstOrDefault(row => row.IDSanPham == id);
+        foreach (var item in ViewBag.SanPhamKhuyenMai)
+        {
+            if (item.IDSanPham == x.IDSanPham)
+            {
+                return true;
+
+            }
+        }
+        return false;
+    }
+}
+
+@foreach (var loai in dsl)
+{
+    // Lọc danh sách sản phẩm theo loại sản phẩm hiện tại
+    var sanPhams = Model.Where(sp => sp.LoaiSanPham.IDLoaiSP == loai.IDLoaiSP).Take(maxItemsPerRow);
+
+    // Nếu có sản phẩm mới hiển thị lên
+    if (sanPhams.Any())
+    {
+        <div class="row mt-4 bg-white mb-13-t pb-12-t row-pro" style="margin-left: -23px">
+            <div class="title-banner-wrapper">
+                <div class="triangle-left"></div>
+                <a class="title-banner">
+                    <span>@loai.TenLoaiSP</span>
+                </a>
+                <div class="triangle-right"></div>
+            </div>
+
+            @foreach (var item in sanPhams)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-12" style="position: relative">
+                    @if (TraVeIDKhuyenMai(item.IDSanPham) == true)
+                    {
+                        <div class="d-flex align-items-center justify-content-center box-flash" style="width: 38px; height: 16px; position: absolute; right: 17px; top: 5px; font-size: 10px; padding: 2px 3px; background-color: #ff4e45; color: white; text-align: center; border-radius: 4px; z-index: 3 ">
+                            <i class="ri-flashlight-line"></i>
+                            @{
+                                if (ViewBag.SanPhamKhuyenMai != null)
+                                {
+                                    foreach (var spkm in ViewBag.SanPhamKhuyenMai)
+                                    {
+                                        if (spkm.IDSanPham == item.IDSanPham)
+                                        {
+                                            <span style="font-weight: 700; ">@String.Format("{0:0.##}%", spkm.KhuyenMai.PhanTramGiam)</span>
+
+                                        }
+                                    }
+                                }
+                            }
+                        </div>
+                    }
+                    <div class="card" style="border: 1px solid #d8e1f9; min-height: 380px; max-height: 400px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;">
+                        <a href="~/SanPham/ChiTietSanPham/@item.IDSanPham">
+                            <img src="~/Content/HinhAnh/@item.HinhAnh" class="w-100" alt="@item.TenSanPham" />
+                        </a>
+                        <div class="card-body" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <p class="card-title fw-400 txt-gray" style="margin: 0; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; height: 45px">@item.TenSanPham</p>
+                            <p class="card-title">
+                            <p class="card-title">
+                                @if (TraVeIDKhuyenMai(item.IDSanPham) == true)
+                                {
+                                    if (ViewBag.SanPhamKhuyenMai != null)
+                                    {
+                                        bool isDiscounted = false;
+                                        decimal discountedPrice = 0;
+
+                                        foreach (var spkm in ViewBag.SanPhamKhuyenMai)
+                                        {
+                                            if (spkm.IDSanPham == item.IDSanPham)
+                                            {
+                                                isDiscounted = true;
+                                                discountedPrice = item.Gia - (item.Gia * (spkm.KhuyenMai.PhanTramGiam / 100));
+                                                break;
+                                            }
+                                        }
+
+                                        if (isDiscounted)
+                                        {
+                                            <span class="fw-700 text-decoration-line-through" style="color: #999;">@String.Format("{0:0,0 đ}", item.Gia)</span>
+                                            <span class="fw-700" style="color: #ff4e45">@String.Format("{0:0,0 đ}", discountedPrice)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fw-700">@String.Format("{0:0,0 đ}", item.Gia)</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-700">@String.Format("{0:0,0 đ}", item.Gia)</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="fw-700">@String.Format("{0:0,0 đ}", item.Gia)</span>
+                                }
+                                <span class="txt-gray fs-13-t">/@item.DonViTinh</span>
+                            </p>
+                            <div class="container-ThemVGio">
+                                <a href="~/DatHang/ThemVaoGioHang?id=@item.IDSanPham" class="btn btn-ThemVaoGio text-white mx-auto fw-500 d-block" style="margin-top: auto">Thêm vào giỏ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <a href="~/SanPham/DanhSachSanPhamTheoLoai/@loai.IDLoaiSP" class="text-center mt-2 d-flex align-items-center justify-content-center" style="text-decoration: none; color: rgb(81 87 100/1); font-size: 14px; padding: 4px 8px; padding-bottom: 0">
+                <span>Xem thêm</span> <span style="font-weight: 500; margin-left: 4px">@loai.TenLoaiSP</span>
+                <i class="ri-arrow-right-s-line" style="font-size: 20px; margin-bottom: -5px"></i>
+            </a>
+        </div>
+    }
+}

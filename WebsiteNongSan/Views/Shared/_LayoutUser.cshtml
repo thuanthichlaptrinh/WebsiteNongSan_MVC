@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="~/Content/Assets/Bootstrap5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Assets/css/base.css" />
+    <link rel="stylesheet" href="~/Content/Assets/css/animation.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="~/Content/Assets/css/style.css" />
+    <script src="~/Content/Assets/Bootstrap5/js/bootstrap.min.js"></script>
+    <script src="~/Content/Assets/js/main.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.4.0/remixicon.css" integrity="sha512-hH7VMMVfPgfkpYx2GazOEG6RrYM+y8cS7FzccwBTWQeyhPv01XYk0MVcuhh4EAimOELWvqKjhNwes/UsYoyN6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+    <!-- Slick JS -->
+    <script src="https://cdn.jsdelivr.net/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+</head>
+<body>
+    @{
+        var user = Session["user"] as WebsiteNongSan.Models.NguoiDung;
+    }
+    <header class="header" style="z-index: 100">
+        <div class="container-fluid" style="background: var(--bg-primary)">
+            <div class="container">
+                <div class="row">
+                    <div class="navbar navbar-expand-sm" style="margin-left: 4px; margin-top: 4px">
+                        <div class="col-3">
+                            <a href="~/SanPham/Index" class="navbar-brand text-white">
+                                <b style="color: #ffea09; font-size: 25px">Organic Shop</b>
+                            </a>
+                        </div>
+
+                        <form action="~/SanPham/Index" method="get" class="col-6 d-flex align-items-center">
+                            <button type="submit" style="margin-right: -40px; border: none; background-color: transparent; z-index: 2">
+                                <i class="ri-search-line fs-22-t" style="color: green"></i>
+                            </button>
+                            <input type="search" name="search" class="form-control w-100 header-search" style="padding-left: 42px" placeholder="Bạn tìm gì ở nông sản xanh - nhóm 2" />
+                            <a href="~/DatHang/XemGioHang" class="nav-link text-white align-items-centers cart">
+                                <i class="ri-shopping-cart-line d-flex align-content-center justify-content-center"></i>
+                                @{
+                                    if (user != null)
+                                    {
+                                        var gioHang = Session["gh"] as List<WebsiteNongSan.Models.GioHang>;
+                                        if (gioHang != null)
+                                        {
+                                            var count = gioHang.Count; // Tính tổng số lượng
+                                            <span>@count</span>
+                                        }
+                                        else
+                                        {
+                                            gioHang = user.GioHangs.ToList();
+                                            if (gioHang != null)
+                                            {
+                                                <span>@gioHang.Count</span>
+
+                                            }
+                                        }
+                                    }
+                                }
+                            </a>
+                        </form>
+                        <div class="col-3" style="margin-left: -3px">
+                            <ul class="navbar-nav" style="float: right">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link text-white location" style="padding-right: 3px">
+                                        <i class="ri-map-pin-line fs-17-t"></i>
+                                        <span>Địa chỉ:</span>
+                                        <span class="fw-700" style="margin-left: 4px; color: rgb(255 255 255 / 1)">Thành phố Hồ Chí Minh, P5, Q8</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3" style="margin-left: -12px">
+                        <div class="d-flex align-items-center py-0 text-white bg-menu" style="border-top-left-radius: 8px; border-top-right-radius: 8px; width: 300.5px">
+                            <i class="ri-menu-line mx-2" style="font-size: 22px"></i>
+                            <span class="text-uperc fw-500 fs-16-t">Danh mục sản phẩm</span>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div></div>
+                    </div>
+                    <div class="col-2" style="padding-left: 0; position: relative; right: -24px">
+                        <div class="dropdown float-end">
+                            <button type="button"
+                                    class="btn dropdown-toggle d-flex bg-menu text-white align-items-center text-center px-2"
+                                    data-bs-toggle="dropdown"
+                                    style="height: 33px; border-top-left-radius: 8px; border-top-right-radius: 8px">
+                                <i class="ri-user-line" style="display: flex; font-size: 18px; align-items: center; justify-content: center; margin-bottom: -2px"></i>
+                                @{
+                                    string tenCuoiCung = user != null && !string.IsNullOrWhiteSpace(user.TenNguoiDung) ? user.TenNguoiDung.Split(' ').Last() : "Chưa rõ";
+
+                                    if (user != null)
+                                    {
+                                        <span style="padding-left: 5px">
+                                            Tài khoản của Anh @tenCuoiCung
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span style="padding-left: 5px">Đăng nhập tài khoản</span>
+                                    }
+                                }
+                            </button>
+                            @if (Session["user"] != null)
+                            {
+                                <ul class="dropdown-menu" style="z-index: 100">
+                                    <li>
+                                        <a href="~/NguoiDung/ThongTinNguoiDung/@user.IDNguoiDung" class="dropdown-item">Thông tin cá nhân </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/NguoiDung/DangXuat" class="dropdown-item">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="dropdown-menu" style="z-index: 100">
+                                    <li>
+                                        <a href="~/NguoiDung/DangNhap" class="dropdown-item">Đăng nhập </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/NguoiDung/DangKy" class="dropdown-item">Đăng ký </a>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <div class="fixed-icon">
+        <a href="#" class="scroll-up">
+            <img src="~/Content/Assets/Images/up-arrow1.png" alt="Scroll Up" />
+        </a>
+        <a href="">
+            <img src="~/Content/Assets/Icon/facebook.png" alt="Facebook" />
+        </a>
+        <a href="">
+            <img src="~/Content/Assets/Images/phone-call.png" alt="YouTube" />
+        </a>
+    </div>
+
+    <script src="~/Content/Assets/js/Slick.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

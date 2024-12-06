@@ -1,0 +1,166 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.DonHang>
+
+@{
+    ViewBag.Title = "DonVuaDat";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@{
+    var user = (WebsiteNongSan.Models.NguoiDung)Session["user"];
+}
+
+<main class="container container-main" style="margin-top: var(--header-height)">
+    <div class="row" style="background-color: #e9edef">
+        <div class="col-3 mt-4">
+            <div class="d-flex align-items-center">
+                <div>
+                    <img src="~/Content/HinhAnh/@user.HinhAnh" style="width: 48px; height: 48px; border-radius: 50%" alt="" />
+                </div>
+                <div style="padding-left: 10px">
+                    <p class="mb-0 fw-500">Ngo Minh Thuan</p>
+                    <a href="" style="text-decoration: none; color: #a1a0a0; font-weight: 500">
+                        <i class="ri-pencil-line"></i>
+                        <span>Sửa hồ sơ</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-4">
+                <ul class="nav flex-column info" style="margin-left: 0">
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/ThongTinNguoiDung/@user.IDNguoiDung" class="nav-link"> <i class="ri-user-line" style="margin-right: 10px"></i><span class="action">Tài khoản của tôi</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/DonMua/@user.IDNguoiDung" class="nav-link"><i class="ri-bill-line" style="margin-right: 10px"></i>Đơn mua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/ThongBao/@user.IDNguoiDung" class="nav-link"><i class="ri-notification-2-line" style="margin-right: 10px"></i>Thông báo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- don hang mua -->
+        <div class="col-9 mt-2">
+            <div class="bg-white navbar navbar-expand-sm bg-light"
+                 style="margin-left: -23px; margin-right: -12px; padding-bottom: 0 !important; box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px">
+                <ul class="navbar-nav list">
+                    <li class="nav-item @(ViewBag.ActiveTab == "DonMua" ? "action" : "")" style="position: relative">
+                        <a href="~/NguoiDung/DonMua/@user.IDNguoiDung" class="nav-link">Tất cả</a>
+                    </li>
+                    <li class="nav-item @(ViewBag.ActiveTab == "DonVuaDat" ? "action" : "")" style="position: relative">
+                        <a href="~/NguoiDung/DonVuaDat/@user.IDNguoiDung" class="nav-link">Đơn vừa đặt</a>
+                    </li>
+                    <li class="nav-item @(ViewBag.ActiveTab == "DonChoGiao" ? "action" : "")" style="position: relative">
+                        <a href="~/NguoiDung/DonChoGiao/@user.IDNguoiDung" class="nav-link">Chờ giao hàng</a>
+                    </li>
+                    <li class="nav-item @(ViewBag.ActiveTab == "DonDaGiao" ? "action" : "")" style="position: relative">
+                        <a href="~/NguoiDung/DonDaGiao/@user.IDNguoiDung" class="nav-link">Hoàn thành</a>
+                    </li>
+                    <li class="nav-item @(ViewBag.ActiveTab == "DonDaHuy" ? "action" : "")" style="position: relative">
+                        <a href="~/NguoiDung/DonDaHuy/@user.IDNguoiDung" class="nav-link">Đã hủy</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <form class="row my-2"
+                  style="margin-left: -23px; margin-right: -12px; position: relative; border-radius: 4px; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px">
+                <input type="search"
+                       placeholder="Bạn có thể tìm kiếm bằng cách nhập ID đơn hàng hoặc tên sản phẩm..."
+                       style="width: 100%; border: none; padding: 8px; background-color: #eaeced; border-radius: 4px; padding-left: 60px !important; outline: none" />
+                <button style=" height: 98%; background-color: #e6e6e6; position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 60px; color: white; border: none; background: transparent; border-radius: 4px; color: gray;">
+                    <i class="ri-search-line"></i>
+                </button>
+            </form>
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="bg-white row p-2" style="margin-left: -23px; border-bottom: 1px solid #ccc">
+                    <div class="col-12 p-3 fw-700">
+                        <span>Không có đơn hàng nào được tìm thấy.</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var donHang in Model)
+                {
+        <div class="bg-white row p-2" style="margin-left: -23px; border-bottom: 1px solid #ccc">
+            <div class="col-12 p-3 fw-700">
+                Mã đơn hàng: @donHang.IDDonHang <br />
+                Trạng thái: @donHang.TrangThai
+            </div>
+            @foreach (var chiTiet in donHang.ChiTietDonHangs)
+            {
+                <div class="col-12 d-flex align-content-center justify-content-between p-3">
+                    <div class="col-1">
+                        <img src="~/Content/HinhAnh/@chiTiet.SanPham.HinhAnh" style="width: 100%" alt="" />
+                    </div>
+                    <div class="col-9" style="padding-left: 10px">
+                        <p>@chiTiet.SanPham.TenSanPham</p>
+                        <p>Số lượng: @chiTiet.SoLuong</p>
+                    </div>
+                    <div class="col-2 text-end">
+                        @if (chiTiet.SanPham.SanPhamKhuyenMais != null && chiTiet.SanPham.SanPhamKhuyenMais.Any(spkm => spkm.KhuyenMai.NgayBatDau <= DateTime.Now && spkm.KhuyenMai.NgayKetThuc >= DateTime.Now))
+                        {
+                            var khuyenMai = chiTiet.SanPham.SanPhamKhuyenMais.First(spkm => spkm.KhuyenMai.NgayBatDau <= DateTime.Now && spkm.KhuyenMai.NgayKetThuc >= DateTime.Now);
+
+                            var giaGiam = chiTiet.SanPham.Gia - (chiTiet.SanPham.Gia * (khuyenMai.KhuyenMai.PhanTramGiam / 100));
+
+                            <p style="text-decoration: line-through; color: gray">
+                                @String.Format("{0:0,0}", chiTiet.SanPham.Gia) đ
+                            </p>
+                            <p style="color: red; font-weight: bold">
+                                @String.Format("{0:0,0}", giaGiam) đ
+                            </p>
+                        }
+                        else
+                        {
+                            <p style="font-weight: bold">
+                                @String.Format("{0:0,0}", chiTiet.SanPham.Gia) đ
+                            </p>
+                        }
+                    </div>
+
+                </div>
+            }
+            <div class="col-12" style="margin-bottom: 13px">
+                <hr style="color: #868686" />
+                <form action="~/DatHang/HuyDon/@donHang.IDDonHang" method="post" class="float-end">
+                    <button class="btn" style="width: 150px; background: var(--bg-primary); border: 1px solid #4a9f43; color: white"
+                            onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')">
+                        Hủy đơn
+                    </button>
+                </form>
+            </div>
+
+        </div>
+                }
+            }
+        </div>
+    </div>
+</main>
+
+
+<style>
+    .info .action {
+        color: green;
+        font-weight: 500;
+    }
+
+    .info .nav-link {
+        color: black;
+        padding-left: 4px;
+    }
+
+    .list .nav-link {
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+        padding-bottom: 14px !important;
+        padding-top: 5px !important;
+    }
+
+    .list .action {
+        border-bottom: 2px solid green;
+    }
+</style>

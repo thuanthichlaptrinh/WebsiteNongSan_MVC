@@ -1,0 +1,103 @@
+﻿@model WebsiteNongSan.Models.NguoiDung
+
+@{
+    ViewBag.Title = "ThongTinNguoiDung";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<main class="container container-main" style="margin-top: var(--header-height)">
+    <div class="row" style="background-color: #e9edef">
+        <div class="col-3 mt-4">
+            <div class="d-flex align-items-center">
+                <div>
+                    <img src="~/Content/HinhAnh/@Model.HinhAnh" style="width: 48px; height: 48px; border-radius: 50%" alt="" />
+                </div>
+                <div style="padding-left: 10px">
+                    <p class="mb-0 fw-500">@Model.TenNguoiDung</p>
+                    <a href="" style="text-decoration: none; color: #a1a0a0; font-weight: 500">
+                        <i class="ri-pencil-line"></i>
+                        <span>Sửa hồ sơ</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-4">
+                <ul class="nav flex-column info" style="margin-left: 0">
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/ThongTinNguoiDung/@Model.IDNguoiDung" class="nav-link"> <i class="ri-user-line" style="margin-right: 10px"></i><span class="action">Tài khoản của tôi</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/DonMua/@Model.IDNguoiDung" class="nav-link"><i class="ri-bill-line" style="margin-right: 10px"></i>Đơn mua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/NguoiDung/ThongBao/@Model.IDNguoiDung" class="nav-link"><i class="ri-notification-2-line" style="margin-right: 10px"></i>Thông báo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ho so -->
+        <div class="col-9 mt-2 bg-white" style="margin-left: -10px">
+            <div class="col-12 p-3">
+                <p class="mb-0" style="font-size: 24px">Hồ sơ của tôi</p>
+                <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                <hr style="color: #7a7979" />
+            </div>
+            <div class="col-12 d-flex">
+                <div class="col-5">
+                    <img src="~/Content/HinhAnh/@Model.HinhAnh" class="mx-auto d-block" style="border-radius: 100%; width: 300px; height: 300px " alt="@Model.TenNguoiDung" />
+                    <p class="text-center" style="color: rgba(85, 85, 85, 0.8)">Ảnh đại diện</p>
+                </div>
+                <div class="col-7" style="border-left: 1px solid #ccc; margin-bottom: 20px">
+                    <div class="mt-5" style="margin-left: 40px; padding-bottom: 120px">
+                        <div class="my-3 d-flex align-items-center">
+                            <label for="" style="width: 120px; color: rgba(85, 85, 85, 0.8)">Họ và tên</label>
+                            <span>@Model.TenNguoiDung</span>
+                        </div>
+                        <div class="my-3 d-flex align-items-center">
+                            <label for="" style="width: 120px; color: rgba(85, 85, 85, 0.8)">Email</label>
+                            <span>@Model.Email</span>
+                        </div>
+                        <div class="my-3 d-flex align-items-center">
+                            <label for="" style="width: 120px; color: rgba(85, 85, 85, 0.8)">Số điện thoại</label>
+                            <span>@Model.SDT</span>
+                        </div>
+                        <div class="my-3 d-flex align-items-center">
+                            <label for="" style="width: 120px; color: rgba(85, 85, 85, 0.8)">Địa chỉ</label>
+                            <span>@Model.DiaChi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="float-end" style="margin-bottom: 12px">
+                    <a href="~/SanPham/Index" class="btn btn-primary fw-500" style="border-radius: 3px">Trang chủ</a>
+                    <a href="~/NguoiDung/CapNhatThongTin/@Model.IDNguoiDung" class="btn btn-success fw-500" style="border-radius: 3px; margin-left: 4px">Sửa hồ sơ</a>
+                </div>
+            </div>
+        </div> 
+    </div>
+</main>
+
+<style>
+    .info .action {
+        color: green;
+        font-weight: 500;
+    }
+
+    .info .nav-link {
+        color: black;
+        padding-left: 4px;
+    }
+
+    .list .nav-link {
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+        padding-bottom: 14px !important;
+        padding-top: 5px !important;
+    }
+
+    .list .action {
+        border-bottom: 2px solid green;
+    }
+</style>
+

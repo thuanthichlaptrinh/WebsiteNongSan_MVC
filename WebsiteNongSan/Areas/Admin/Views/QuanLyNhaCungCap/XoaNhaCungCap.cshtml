@@ -1,0 +1,80 @@
+﻿@model WebsiteNongSan.Models.NhaCungCap
+
+@{
+    ViewBag.Title = "XoaNhaCungCap";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý nhà cung cấp</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/Index">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý nhà cung cấp</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Xóa nhà cung cấp</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h6>Xóa nhà cung cấp</h6>
+        </div>
+        <div class="table-wrapper" style="background-color: #fff; padding: 18px">
+            @using (Html.BeginForm("XoaNhaCungCap", "QuanLyNhaCungCap", FormMethod.Post, new { style = "display: flex" }))
+            {
+                <div style="width: calc(100% / 2); margin-right: 30px">
+                    <div style="margin-bottom: 20px">
+                        Tên nhà cung cấp:
+                        <span style="color: black!important; font-weight: 500">@Model.TenNhaCungCap</span>
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        Số điện thoại:
+                        <span style="color: black!important; font-weight: 500">@Model.SDT</span>
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        Email:
+                        <span style="color: black!important; font-weight: 500">@Model.Email</span>
+                    </div>
+                    <div style="display: flex">
+                        <button type="submit" style="width: 15%; padding: 10px; margin-top: 20px; background-color: #1c75e7; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px">
+                            Xóa
+                        </button>
+                        <a href="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap" class="button" style="text-align: center; width: 15%; padding: 10px; margin-top: 20px; background-color: #fc3b56; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px; margin-left: 8px">Hủy</a>
+                    </div>
+                </div>
+                <div style="width: calc(100% / 2); margin-left: 30px">
+                    <div style="margin-bottom: 20px">
+                        Địa chỉ:
+                        <span style="color: black!important; font-weight: 500">@Model.DiaChi</span>
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        Ghi chú:
+                        <span style="color: black!important; font-weight: 500">@Model.GhiChu</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    input, select, .form-control {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #bebebe;
+        padding: 12px;
+        margin-top: 8px;
+    }
+
+    button:hover, .button:hover {
+        opacity: 0.8;
+    }
+</style>
+
+
+
+
+
+
+

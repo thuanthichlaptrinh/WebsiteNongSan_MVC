@@ -1,0 +1,113 @@
+﻿@model WebsiteNongSan.Models.SanPham
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý sản phẩm</h1>
+<ul class="breadcrumbs">
+    <li><a href="#">Trang chủ</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Quản lý sản phẩm</a></li>
+    <li><a href="#">Trang chủ</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Xóa sản phẩm</a></li>
+</ul>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h6>BẠN CÓ MUỐN XÓA SẢN PHẨM NÀY?</h6>
+        </div>
+        <div class="table-wrapper" style="display: flex; background-color: white; width: 100%">
+            <div style="width: 35%; padding: 20px 0">
+                <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+                    <img src="~/Content/HinhAnh/@Model.HinhAnh" alt="@Model.TenSanPham"
+                         style=" width: 260px; height: 260px; object-fit: cover" />
+                </div>
+            </div>
+            <div style="width: 65%; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 10px">
+                <div style="width: 100%; display: flex; align-items: center; justify-content: space-around">
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Mã: <span>@Model.IDSanPham</span></th>
+                            </tr>
+                            <tr>
+                                <th>Họ và tên: <span>@Model.TenSanPham</span></th>
+                            </tr>
+                            <tr>
+                                <th>SDT: <span>@Model.Gia</span></th>
+                            </tr>
+                            <tr>
+                                <th>Email: <span>@Model.SoLuongTon</span></th>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Mật khẩu: <span>@Model.LoaiSanPham.TenLoaiSP</span></th>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ: <span>@Model.NhaCungCap.TenNhaCungCap</span></th>
+                            </tr>
+                            <tr>
+                                <th>Ngày tạo: <span>@Model.NgayTao</span></th>
+                            </tr>
+                            <tr>
+                                <th>Vai trò: <span> @(Model.MoTa.Length > 70 ? Model.MoTa.Substring(0, 70) + "..." : Model.MoTa)</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%">
+                    <form action="~/Admin/QuanLySanPham/XoaSanPham/@Model.IDSanPham" method="post" style="display: flex; align-items: center; justify-content: space-between">
+                        <div style="text-align: center; display: flex; align-items: center">
+                            <button type="submit" class="btn btn-danger" style="font-size: 16px">Xóa</button>
+                            <a href="~/Admin/QuanLySanPham/DanhSachSanPham" class="btn btn-primary">Trở về</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    th {
+        font-size: 18px !important;
+        color: black !important;
+        border-bottom: none !important;
+    }
+
+    span {
+        color: #555;
+    }
+
+    .btn {
+        display: block;
+        width: 120px;
+        padding: 8px 36px;
+        margin-left: 4px;
+        color: white;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+    .btn-danger {
+        background-color: #f93b57;
+        border: 1px solid #f93b57;
+    }
+
+    .btn-primary {
+        margin-left: 10px;
+        background-color: #1c75e7;
+    }
+</style>
+

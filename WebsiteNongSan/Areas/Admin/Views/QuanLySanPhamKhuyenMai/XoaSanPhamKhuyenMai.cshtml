@@ -1,0 +1,112 @@
+﻿@model WebsiteNongSan.Models.SanPhamKhuyenMai
+
+@{
+    ViewBag.Title = "Xóa sản phẩm khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý sản phẩm khuyến mãi</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="#">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý sản phẩm khuyến mãi</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Xóa sản phẩm khuyến mãi</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h6>BẠN CÓ MUỐN XÓA SẢN PHẨM KHUYỄN MÃI NÀY KHÔNG?</h6>
+        </div>
+        <div class="table-wrapper" style="display: flex; background-color: white; width: 100%">
+            <div style="width: 35%; padding: 20px 0">
+                <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+                    <img src="~/Content/HinhAnh/@Model.SanPham.HinhAnh" alt="@Model.SanPham.TenSanPham"
+                         style=" width: 260px; height: 260px; object-fit: cover" />
+                </div>
+            </div>
+            <div style="width: 65%; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 10px">
+                <div style="width: 100%; display: flex; align-items: center; justify-content: space-around">
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Tên sản phẩm: <span >@Model.SanPham.TenSanPham</span></th>
+                            </tr>
+                            <tr>
+                                <th>Tên khuyến mãi: <span >@Model.KhuyenMai.TenKhuyenMai</span></th>
+                            </tr>
+                            <tr>
+                                <th>Phần trăm khuyến mãi: <span>@String.Format("{0:0}", Model.KhuyenMai.PhanTramGiam)%</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Số lượng: <span>@Model.SanPham.SoLuongTon</span></th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Giá bán:
+                                    <small style="text-decoration: line-through">@String.Format("{0:0,0}", Model.SanPham.Gia)đ</small>
+                                    <small>/</small>
+                                    <small>@String.Format("{0:0,0}", (Model.SanPham.Gia - (Model.SanPham.Gia * (Model.KhuyenMai.PhanTramGiam / 100))))đ</small>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Ghi chú: <span>@Model.GhiChu</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="width: 100%">
+                    <form action="~/Admin/QuanLySanPhamKhuyenMai/XoaSanPhamKhuyenMai?idSanPham=@Model.IDSanPham&idKhuyenMai=@Model.IDKhuyenMai" method="post" style="display: flex; align-items: center; justify-content: space-between">
+                        <div style="text-align: center; display: flex;">
+                            <button type="submit" class="btn btn-danger" style="font-size: 16px">Xóa</button>
+                            <a href="~/Admin/QuanLySanPhamKhuyenMai/DanhSachSanPhamKM" class="btn btn-primary">Trở về</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    th {
+        font-size: 18px !important;
+        color: black !important;
+        border-bottom: none !important;
+    }
+
+    span {
+        color: #555;
+    }
+
+    .btn {
+        display: block;
+        width: 120px;
+        padding: 8px 36px;
+        margin-left: 4px;
+        color: white;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+    .btn-danger {
+        background-color: #f93b57;
+        border: 1px solid #f93b57;
+    }
+
+    .btn-primary {
+        margin-left: 10px;
+        background-color: #1c75e7;
+    }
+</style>
+

@@ -1,0 +1,109 @@
+﻿@model WebsiteNongSan.Models.SanPham
+
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý sản phẩm</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/DanhSachSanPham">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="~/Admin/QuanLySanPham/DanhSachSanPham" class="active">Quản lý sản phẩm</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Thêm mới sản phẩm</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper" style="background-color: #fff; padding: 18px">
+            @using (Html.BeginForm("ThemMoiSanPham", "QuanLySanPham", FormMethod.Post, new { enctype = "multipart/form-data", style = "display: flex" }))
+            {
+                <div style="width: calc(100% / 2); margin-right: 30px">
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.TenSanPham)
+                        @Html.TextBoxFor(model => model.TenSanPham, new { placeholder = "Nhập tên sản phẩm", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.Label("Hình ảnh")
+                        <input type="file" name="txtHinhAnh" style="height: 43.45px; width: 100%" />
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.SoLuongTon)
+                        @Html.TextBoxFor(model => model.SoLuongTon, new { placeholder = "Nhập số lượng tồn", @class = "form-control", type = "number" })
+                        @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.DonViTinh)
+                        @Html.TextBoxFor(model => model.DonViTinh, new { placeholder = "Nhập đơn vị tính", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DonViTinh, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.IDLoaiSP)
+                        @Html.DropDownListFor(model => model.IDLoaiSP, (SelectList)ViewBag.DsLoai, "--Chọn loại sản phẩm--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IDLoaiSP, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.IDNhaCungCap)
+                        @Html.DropDownListFor(model => model.IDNhaCungCap, (SelectList)ViewBag.DsNCC, "--Chọn nhà cung cấp--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IDNhaCungCap, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="display: flex">
+                        <button type="submit" style="width: 15%; padding: 10px; margin-top: 20px; background-color: #1c75e7; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px">Thêm</button>
+                        <a href="~/Admin/QuanLySanPham/DanhSachSanPham" class="button" style="text-align: center; width: 15%; padding: 10px; margin-top: 20px; background-color: #fc3b56; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px; margin-left: 8px">Hủy</a>
+                    </div>
+                </div>
+                <div style="width: calc(100% / 2); margin-left: 30px">
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.Gia)
+                        @Html.TextBoxFor(model => model.Gia, new { placeholder = "Nhập giá bán bán", type = "number", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.MoTa)
+                        <textarea class="form-control" name="MoTa" id="inputNoiDung"></textarea>
+                        @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    input, select, .form-control {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #bebebe;
+        padding: 12px;
+        margin-top: 8px;
+    }
+
+    button:hover, .button:hover {
+        opacity: 0.8;
+    }
+</style>
+
+
+@section DoanJS{
+    <script>
+        CKEDITOR.replace('inputNoiDung');
+    </script>
+}
+
+
+
+
+@*<div style="margin-bottom: 20px">
+        @Html.LabelFor(model => model.TrangThai)
+        @Html.DropDownListFor(model => model.TrangThai,
+            new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "Còn kinh doanh" },
+                new SelectListItem { Value = "0", Text = "Ngừng kinh doanh" }
+            },
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+    </div>*@

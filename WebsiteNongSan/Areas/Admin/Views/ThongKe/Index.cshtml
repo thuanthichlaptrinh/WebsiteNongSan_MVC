@@ -1,0 +1,136 @@
+﻿@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Thống kê";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Thống kê</h1>
+<ul class="breadcrumbs">
+    <li><a href="#">Trang chủ</a></li>
+    <li class="divider">/</li>
+    <li><a href="#" class="active">Thống kê</a></li>
+</ul>
+
+<div class="info-data">
+    <div class="card">
+        <div class="head">
+            <div>
+                <h2>@ViewBag.SoSanPham</h2>
+                <p>Sản phẩm</p>
+            </div>
+            <i class="bx bx-trending-up icon"></i>
+        </div>
+        <span class="progress" data-value="40%"></span>
+        <span class="label">@ViewBag.SoSanPham sản phẩm</span>
+    </div>
+    <div class="card">
+        <div class="head">
+            <div>
+                <h2>@ViewBag.SoSanPhamKM</h2>
+                <p>Sản phẩm khuyến mãi</p>
+            </div>
+            <i class="bx bx-trending-down icon down"></i>
+        </div>
+        <span class="progress" data-value="60%"></span>
+        <span class="label">@ViewBag.SoSanPhamKM sản phẩm khuyến mãi</span>
+    </div>
+    <div class="card">
+        <div class="head">
+            <div>
+                <h2>@ViewBag.SoDonHang</h2>
+                <p>Đơn hàng</p>
+            </div>
+            <i class="bx bx-trending-up icon"></i>
+        </div>
+        <span class="progress" data-value="30%"></span>
+        <span class="label">@ViewBag.SoDonHang đơn hàng đã bán</span>
+    </div>
+    <div class="card">
+        <div class="head">
+            <div>
+                <h2>@ViewBag.SoNguoiDung</h2>
+                <p>Người dùng</p>
+            </div>
+            <i class="bx bx-trending-up icon"></i>
+        </div>
+        <span class="progress" data-value="80%"></span>
+        <span class="label">@ViewBag.SoNguoiDung người dùng</span>
+    </div>
+</div>
+<div class="data">
+    <div class="content-data">
+        <div class="head">
+            <h3>Sản phẩm bán chạy theo ngày</h3>
+            <div class="menu">
+                <i class="bx bx-dots-horizontal-rounded icon"></i>
+                <ul class="menu-link">
+                    <li><a href="#">Edit</a></li>
+                    <li><a href="#">Save</a></li>
+                    <li><a href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="chart">
+            <canvas id="chartSanPhamBanChay"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   // Lấy dữ liệu từ ViewBag
+   const labels = @Html.Raw(JsonConvert.SerializeObject(ViewBag.NgayThang)); // Trục X (các ngày)
+   const sanPhamBanChay = @Html.Raw(JsonConvert.SerializeObject(ViewBag.SanPhamBanChay)); // Dữ liệu sản phẩm
+
+   // Chuẩn bị datasets cho từng sản phẩm
+   const datasets = sanPhamBanChay.map(sp => {
+       return {
+           label: sp.TenSanPham, // Tên sản phẩm
+           data: labels.map(label => {
+               const index = sp.Ngay.indexOf(label); // Tìm ngày tương ứng
+               return index !== -1 ? sp.SoLuong[index] : 0; // Nếu có, lấy số lượng; nếu không, trả về 0
+           }),
+           borderColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // Màu ngẫu nhiên cho từng sản phẩm
+           backgroundColor: 'rgba(0, 0, 0, 0)', // Không tô màu nền
+           borderWidth: 2,
+           pointBackgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // Màu nền của các điểm dữ liệu
+           pointBorderColor: 'rgba(255, 255, 255, 0.8)', // Màu viền của các điểm dữ liệu
+           pointRadius: 5, // Kích thước của điểm
+           fill: false, // Không điền màu dưới đường
+           tension: 0.4 // Độ cong của đường
+       };
+   });
+
+   // Vẽ biểu đồ
+   const ctx = document.getElementById('chartSanPhamBanChay').getContext('2d');
+   const chartSanPhamBanChay = new Chart(ctx, {
+       type: 'line',
+       data: {
+           labels: labels, // Trục X: các ngày
+           datasets: datasets // Dữ liệu của từng sản phẩm
+       },
+       options: {
+           responsive: true,
+           plugins: {
+               legend: {
+                   position: 'top', // Hiển thị tên sản phẩm trên biểu đồ
+               }
+           },
+           scales: {
+               x: {
+                   title: {
+                       display: true,
+                       text: 'Ngày' // Tiêu đề cho trục X
+                   }
+               },
+               y: {
+                   title: {
+                       display: true,
+                       text: 'Số lượng bán' // Tiêu đề cho trục Y
+                   },
+                   beginAtZero: true // Đảm bảo trục Y bắt đầu từ 0
+               }
+           }
+       }
+   });
+</script>

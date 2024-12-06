@@ -1,0 +1,114 @@
+﻿@model WebsiteNongSan.Models.NguoiDung
+
+@{
+    ViewBag.Title = "ChiTietNguoiDung";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý người dùng</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/Index">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý người dùng</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Chi tiết người dùng</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper" style="display: flex; background-color: white; width: 100%">
+            <div style="width: 35%; padding: 20px 0">
+                <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+                    <img src="~/Content/HinhAnh/@Model.HinhAnh" alt="@Model.TenNguoiDung"
+                         style=" width: 260px; height: 260px; object-fit: cover; border-radius: 50%" />
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px">
+                    <a href="~/Admin/QuanLyNguoiDung/CapNhatNguoiDung/@Model.IDNguoiDung">Cập nhật</a> 
+                    <span style="margin: 0 4px;">|</span>
+                    <a href="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung">Trở về</a>
+                </div>
+            </div>
+            <div style="width: 65%; background-color: white; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 10px">
+                <div style="width: 100%;">
+                    <div class="card-header">
+                        <h6>THÔNG TIN NGƯỜI DÙNG</h6>
+                    </div>
+                </div>
+                <div style="width: 100%; display: flex; align-items: center; justify-content: space-around">
+                    <div style="width: 50%">
+
+                        <table class="authors-table">
+                            <tr>
+                                <th>Mã: <span>@Model.IDNguoiDung</span></th>
+                            </tr>
+                            <tr>
+                                <th>Họ và tên: <span>@Model.TenNguoiDung</span></th>
+                            </tr>
+                            <tr>
+                                <th>SDT: <span>@Model.SDT</span></th>
+                            </tr>
+                            <tr>
+                                <th>Email: <span>@Model.Email</span></th>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div style="width: 50%">
+                        <table class="authors-table">
+                            <tr>
+                                <th>Mật khẩu: <span>@Model.MatKhau</span></th>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ: <span>@Model.DiaChi</span></th>
+                            </tr>
+                            <tr>
+                                <th>Ngày tạo: <span>@Model.NgayTao</span></th>
+                            </tr>
+                            <tr>
+                                <th>Vai trò: <span>@Model.VaiTro</span></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    th {
+        font-size: 18px !important;
+        color: black !important;
+        border-bottom: none !important;
+    }
+
+    span {
+        color: #555;
+    }
+
+    .btn {
+        display: block;
+        width: 120px;
+        padding: 8px 36px;
+        margin-left: 4px;
+        color: white;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+    .btn-danger {
+        background-color: #f93b57;
+        border: 1px solid #f93b57;
+    }
+
+    .btn-primary {
+        margin-left: 10px;
+        background-color: #1c75e7;
+    }
+</style>
+

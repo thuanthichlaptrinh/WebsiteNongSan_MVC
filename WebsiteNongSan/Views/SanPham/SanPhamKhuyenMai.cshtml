@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.SanPhamKhuyenMai>
+
+<div class="d-flex justify-content-between align-items-center p-1" style="margin-bottom: 3px">
+    <h5 style="color: var(--text-primary)" class="fw-700 text-center mb-0">KHUYẾN MÃI SỐC</h5>
+    <a href="~/SanPham/DanhSachSanPhamKhuyenMai" class="fs-14-t d-flex align-items-center" style="text-decoration: none; margin-right: -6px">
+        Xem thêm khuyến mãi
+        <i class="ri-arrow-right-s-line fs-20-t fw-700"></i>
+    </a>
+</div>
+
+<div class="slick-carousel">
+    @foreach (var item in Model)
+    {
+        <div class="product-card" style="position: relative">
+            <div class="d-flex align-items-center justify-content-center box-flash" style=" width: 38px; height: 16px; position: absolute; right: 12px; top: 12px; font-size: 10px; padding: 2px 3px; background-color: #ff4e45; color: white; text-align: center; border-radius: 4px;">
+                <i class="ri-flashlight-line"></i>
+                <span style="font-weight: 700">@String.Format("{0:0.##}%", item.KhuyenMai.PhanTramGiam)</span>
+            </div>
+            <div class="p-1" style="border-radius: 4px; background: linear-gradient(180deg, #8eca51, #2c8e5f 84.5%, #5e9329)">
+                <a href="~/SanPham/ChiTietSanPham/@item.IDSanPham">
+                    <img src="~/Content/HinhAnh/@item.SanPham.HinhAnh" class="w-100" alt="" />
+                </a>
+                <div>
+                    <p class="bg-white w-100 mt-1 text-center text-secondary m-0" style="border-radius: 20px; font-size: 12px; font-weight: 500">Còn 25 suất</p>
+                    <div class="d-flex justify-content-between px-2 py-2">
+                        <div>
+                            <p class="txt-yellow m-0" style="font-weight: 700">@String.Format("{0:0,0}", (item.SanPham.Gia - (item.SanPham.Gia * (item.KhuyenMai.PhanTramGiam / 100))))đ</p>
+                            <p class="text-white m-0 fw-500 fs-13-t" style="text-decoration: line-through">@String.Format("{0:0,0}", item.SanPham.Gia)đ</p>
+                        </div>
+                        <a href="@Url.Action("ThemVaoGioHang", "DatHang", new { id = item.IDSanPham })" class="btn btn-buy bg-white d-block float-end txt-primary mt-2 btn-add-to-cart" style="width: 100px; height: 40px">
+                            <b>MUA</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*<div class="toast align-items-center text-bg-success border-0 position-fixed top-0 end-0 p-3" id="toastAddToCart" role="alert" aria-live="assertive" aria-atomic="true" style="z-index: 1050;">
+    <div class="d-flex">
+        <div class="toast-body">
+            Sản phẩm đã được thêm vào giỏ hàng!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>*@
+
+<script>
+    //window.onload = function () {
+    //    // Kiểm tra xem người dùng có đang ở trên trang chủ không
+    //    if (window.location.pathname !== '/') {
+    //        // Kiểm tra xem có thông báo Toast hay không
+    //        var toastElement = document.getElementById('toastAddToCart');
+    //        if (toastElement && toastElement.innerText.trim() !== '') {
+    //            var toast = new bootstrap.Toast(toastElement);
+    //            toast.show();
+    //        }
+    //    }
+    //};
+</script>
+
+

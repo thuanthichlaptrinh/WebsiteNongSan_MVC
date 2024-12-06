@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.LoaiSanPham>
+
+<style>
+    .danhmuc .nav-item:last-child .nav-link {
+        border-bottom: none;
+    }
+</style>
+
+<ul class="nav flex-column bg-white danhmuc">
+    @foreach (var item in Model)
+    {
+        <li class="nav-item">
+            <a href="~/SanPham/DanhSachSanPhamTheoLoai/@item.IDLoaiSP" class="nav-link border-b mx-3 p-0 py-2 text-dark fw-700 text-uperc fs-14-t">@item.TenLoaiSP</a>
+        </li>
+    }
+</ul>

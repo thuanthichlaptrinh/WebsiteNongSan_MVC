@@ -1,0 +1,12 @@
+/* Định nghĩa hiệu ứng chuyển động */
+@keyframes bg-move-fade {
+    0% {
+        background-position: 100% 50%; /* Gradient nằm ngoài bên phải */
+    }
+    50% {
+        background-position: 100% 50%; /* Gradient di chuyển sang bên ngoài phải */
+    }
+    100% {
+        background-position: -100% 50%; /* Gradient bắt đầu từ bên ngoài trái */
+    }
+}

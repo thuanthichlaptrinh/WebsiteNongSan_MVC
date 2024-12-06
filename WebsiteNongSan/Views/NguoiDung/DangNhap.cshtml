@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Bootstrap5/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+            @*@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");*@
+            body {
+                font-family: "Poppins", sans-serif;
+                background: #ececec;
+            }
+
+            /*------------ Login container ------------*/
+            .box-area {
+                width: 930px;
+            }
+
+            /*------------ Right box ------------*/
+            .right-box {
+                padding: 40px 30px 40px 40px;
+            }
+
+            /*------------ Custom Placeholder ------------*/
+            ::placeholder {
+                font-size: 16px;
+            }
+
+            .rounded-4 {
+                border-radius: 20px;
+            }
+            .rounded-5 {
+                border-radius: 30px;
+            }
+
+            .btn-xanh:hover {
+                opacity: 0.8;
+            }
+
+            /*------------ For small screens------------*/
+            @*@media only screen and (max-width: 768px) {
+                .box-area {
+                    margin: 0 10px;
+                }
+                .left-box {
+                    height: 100px;
+                    overflow: hidden;
+                }
+                .right-box {
+                    padding: 20px;
+                }
+            }*@
+    </style>
+</head>
+<body>
+    <!----------------------- Main Container -------------------------->
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <!----------------------- Login Container -------------------------->
+
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+            <!--------------------------- Left Box ----------------------------->
+
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+                 style="background: radial-gradient(159.85% 367.97% at 150% 123.85%, #ffe147 0, #65ae17 38.76%, #469c4b 59.65%, #00713b 100%)">
+                
+                <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600">Welcome!</p>
+                <small class="text-white text-wrap text-center" style="width: 17rem; font-family: 'Courier New', Courier, monospace">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</small>
+            </div>
+
+            <!-------------------- ------ Right Box ---------------------------->
+            <div class="col-md-6 right-box">
+                <a href="~/SanPham/Index" class="text-dark p-3" style="position: relative; top: -40px; right: -365px">
+                    <img src="~/Content/HinhAnh/close.png" style="width: 14px" alt="" />
+                </a>
+                <form action="~/NguoiDung/DangNhap" method="post" class="row align-items-center">
+                    <div class="header-text mb-4">
+                        <h2>Xin chào !</h2>
+                        <p>Chúng tôi rất vui khi bạn trở lại.</p>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="taiKhoan" class="form-control form-control-lg bg-light fs-6" placeholder="Số điện thoại" required />
+                    </div>
+                    <div class="input-group mb-1">
+                        <input type="password" name="matKhau" class="form-control form-control-lg bg-light fs-6" placeholder="Mật khẩu" required />
+                    </div>
+                    <div class="input-group mb-5 d-flex justify-content-between">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="formCheck" />
+                            <label for="formCheck" class="form-check-label text-secondary"><small>Ghi nhớ</small></label>
+                        </div>
+                        <div class="forgot">
+                            <small><a href="#">Quên mật khẩu?</a></small>
+                        </div>
+                        @if (ViewBag.Error != null)
+                        {
+                            <span style="color: red">@ViewBag.Error</span>
+                        }
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <button type="submit" class="btn btn-xanh text-white btn-lg w-100 fs-6" style="background: radial-gradient(159.85% 367.97% at 150% 123.85%, #ffe147 0, #65ae17 38.76%, #469c4b 59.65%, #00713b 100%)">
+                            Đăng nhập
+                        </button>
+                    </div>
+                    @*<div class="input-group mb-3">
+                            <button class="btn btn-lg btn-light w-100 fs-6"><img src="images/google.png" style="width: 20px" class="me-2" /><small>Đăng nhập bằng Google</small></button>
+                        </div>*@
+                    <div class="row">
+                        <small>
+                            Bạn chưa có tài khoản?
+                            <a href="~/NguoiDung/DangKy">Đăng ký</a>
+                        </small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

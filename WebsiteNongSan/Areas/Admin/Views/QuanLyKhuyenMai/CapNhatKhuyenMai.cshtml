@@ -1,0 +1,74 @@
+﻿@model WebsiteNongSan.Models.KhuyenMai
+
+@{
+    ViewBag.Title = "CapNhatKhuyenMai";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý khuyến mãi</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/DanhSachNguoiDung">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý khuyến mãi</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Cập nhật khuyến mãi</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h6>Cập nhật khuyến mãi</h6>
+        </div>
+        <div class="table-wrapper" style="background-color: #fff; padding: 18px">
+            @using (Html.BeginForm("CapNhatKhuyenMai", "QuanLyKhuyenMai", FormMethod.Post, new { style = "display: flex" }))
+            {
+                <div style="width: calc(100% / 2); margin-right: 30px">
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.TenKhuyenMai))
+                        @Html.TextBoxFor(model => model.TenKhuyenMai, new { placeholder = "Nhập tên giảm giá", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TenKhuyenMai, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.PhanTramGiam)
+                        @Html.TextBoxFor(model => model.PhanTramGiam, new { placeholder = "Nhập phần trăm giảm giá", type = "number", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PhanTramGiam, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="display: flex">
+                        <button type="submit" style="width: 15%; padding: 10px; margin-top: 20px; background-color: #1c75e7; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px">
+                            Cập nhật
+                        </button>
+                        <a href="~/Admin/QuanLyKhuyenMai/DanhSachKhuyenMai" class="button" style="text-align: center; width: 15%; padding: 10px; margin-top: 20px; background-color: #fc3b56; border: none; border-radius: 4px; color: white; font-weight: 500; font-size: 16px; margin-left: 8px">Hủy</a>
+                    </div>
+                </div>
+                <div style="width: calc(100% / 2); margin-left: 30px">
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.NgayBatDau, htmlAttributes: new { @class = "" })
+                        @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.NgayBatDau, "", new { @class = "text-danger" })
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "" })
+                        @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                        @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    input, select, .form-control {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #bebebe;
+        padding: 12px;
+        margin-top: 8px;
+    }
+
+    button:hover, .button:hover {
+        opacity: 0.8;
+    }
+</style>

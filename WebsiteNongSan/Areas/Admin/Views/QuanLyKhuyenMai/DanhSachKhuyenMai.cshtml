@@ -1,0 +1,146 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.KhuyenMai>
+
+@{
+    ViewBag.Title = "DanhSachKhuyenMai";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="title">Quản lý Khuyến mãi</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="#">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý Khuyến mãi</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Danh sách Khuyến mãi</a></li>
+    </ul>
+</div>
+
+<div style="margin-top: 20px;">
+    <form action="~/Admi        n/QuanLyKhuyenMai/DanhSachKhuyenMai" method="get" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Tìm kiếm -->
+            <input type="search" name="Search" value="@ViewBag.Search" placeholder="Nhập từ khóa..." style="padding: 8px 12px; width: 340px; border: 1px solid #cfcfcf; border-radius: 4px; height: 37px; box-sizing: border-box; font-size: 15px;" />
+
+            <!-- Sắp xếp theo Tên -->
+            <select name="SortName" style="padding: 6px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Lọc theo tên</option>
+                <option value="tang" @(ViewBag.SortName == "tentang" ? "selected" : "")>Tên từ A-Z</option>
+                <option value="giam" @(ViewBag.SortName == "tengiam" ? "selected" : "")>Tên từ Z-A</option>
+            </select>
+
+            <!-- Lọc theo ngày -->
+            <div>
+                <span>Từ</span>
+                <input type="date" name="SortDate1" value="@ViewBag.SortDate1" style="padding: 6px 12px; height: 37px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; font-size: 15px;" />
+                <span>Đến</span>
+                <input type="date" name="SortDate2" value="@ViewBag.SortDate2" style="padding: 6px 12px; height: 37px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; font-size: 15px;" />
+            </div>
+
+            <!-- Nút làm mới -->
+            <button type="submit" style="background-color: #1472ea; color: #557164; color:white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; height: 36px; cursor: pointer; ">
+                <i class="fa-solid fa-arrow-rotate-right" style="font-size: 13px;"></i>
+                <span style="font-weight: 500; margin-left: 6px;">Làm mới</span>
+            </button>
+        </div>
+
+        <!-- Nút thêm mới -->
+        <div>
+            <a href="~/Admin/QuanLyKhuyenMai/ThemKhuyenMai" style="padding: 8px 16px; background-color: #1472ea; color: white; border-radius: 4px; font-size: 15px; height: 40px; text-decoration: none;">
+                <i class="fa-solid fa-plus"></i>
+                <span style="margin-left: 6px; font-weight: 500">Thêm mới</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="card">
+        @*<div class="card-header">
+                <h6>Danh sách khuyến mãi</h6>
+            </div>*@
+        <div class="table-wrapper">
+            <table class="authors-table">
+                <thead>
+                    <tr style="background-color: #D3D3D3">
+                        <th style="color: #2d3436">Mã khuyến mãi</th>
+                        <th style="color: #2d3436">Tên khuyến mãi</th>
+                        <th style="color: #2d3436">Ngày bắt đầu</th>
+                        <th style="color: #2d3436">Ngày kết thúc</th>
+                        <th style="color: #2d3436">Phần trăm khuyến mãi</th>
+                        <th style="color: #2d3436">Hiệu lực</th>
+                        <th style="color: #2d3436">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="tableProduct">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDKhuyenMai</td>
+                            <td>
+                                <div class="author-info">
+                                    <div>
+                                        <small style="font-size: 14px">@item.TenKhuyenMai</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.NgayBatDau</td>
+                            <td>@item.NgayKetThuc</td>
+                            <td>@String.Format("{0:0}", item.PhanTramGiam)%</td>
+                            <td>
+                                <span class="countdown" data-enddate="@item.NgayKetThuc">Đang tải...</span>
+                            </td>
+                            <td>
+                                <a href="~/Admin/QuanLyKhuyenMai/CapNhatKhuyenMai/@item.IDKhuyenMai" class="edit-link"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="~/Admin/QuanLyKhuyenMai/XoaKhuyenMai/@item.IDKhuyenMai" class="delete-link"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Phân trang -->
+<div class="custom-pagination">
+    <a href="~/Admin/QuanLyKhuyenMai/DanhSachKhuyenMai?search=@ViewBag.Search&SortName=@ViewBag.SortName&SortDate1=@ViewBag.SortDate1&SortDate2=@ViewBag.SortDate2&page=1" class="custom-button">&laquo;</a>
+    @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+    {
+        var cssClass = i == ViewBag.Page ? "custom-button active" : "custom-button";
+        <a href="~/Admin/QuanLyKhuyenMai/DanhSachKhuyenMai?search=@ViewBag.Search&SortName=@ViewBag.SortName&SortDate1=@ViewBag.SortDate1&SortDate2=@ViewBag.SortDate2&page=@i" class="@cssClass">@i</a>
+    }
+    <a href="~/Admin/QuanLyKhuyenMai/DanhSachKhuyenMai?search=@ViewBag.Search&SortName=@ViewBag.SortName&SortDate1=@ViewBag.SortDate1&SortDate2=@ViewBag.SortDate2&page=@ViewBag.NoOfPages" class="custom-button">&raquo;</a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const countdownElements = document.querySelectorAll(".countdown");
+
+        countdownElements.forEach(function (element) {
+            const endDate = new Date(element.getAttribute("data-enddate"));
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeDiff = endDate - now;
+
+                if (timeDiff <= 0) {
+                    element.textContent = "Hết hiệu lực";
+                } else {
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                    element.textContent = `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+                }
+            }
+
+            updateCountdown(); // Cập nhật lần đầu ngay khi tải trang
+            setInterval(updateCountdown, 1000); // Cập nhật mỗi giây
+        });
+    });
+</script>
+
+
+

@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Assets/css/StyleAdmin.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Assets/css/ProductAdmin.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Content/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Bootstrap5/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+        /* Style cho phân trang */
+        .custom-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -5px;
+        }
+
+        .custom-button {
+            display: inline-block;
+            padding: 10px 15px;
+            color: #007bff;
+            text-decoration: none;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            font-size: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            /* Khi hover lên các button */
+            .custom-button:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+            /* Style cho nút hiện tại (active) */
+            .custom-button.active {
+                background-color: #007bff;
+                color: white;
+            }
+
+            /* Style cho các button điều hướng (<<, >>) */
+            .custom-button:first-child,
+            .custom-button:last-child {
+                background-color: #f1f1f1;
+            }
+
+            .custom-button:first-child {
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+                border-left: 1px solid #ddd;
+            }
+
+            .custom-button:last-child {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+
+                .custom-button:first-child:hover,
+                .custom-button:last-child:hover {
+                    background-color: #dcdcdc;
+                }
+    </style>
+</head>
+<body>
+    <section id="sidebar">
+        <a href="~/Admin/HomeAdmin/Index" class="brand"><i class="bx bxs-smile icon"></i> ADMIN</a>
+        <ul class="side-menu">
+            <li>
+                <a href="~/Admin/ThongKe/Index"><i class="fa-solid fa-gauge icon"></i> Thống kê</a>
+            </li>
+            <li class="divider" data-text="main">Main</li>
+            <li>
+                <a href="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung"><i class="fa-solid fa-users-line icon"></i> Quản lý người dùng</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLySanPham/DanhSachSanPham"><i class="fa-solid fa-shirt icon"></i> Quản lý sản phẩm</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLyLoaiSanPham/DanhSachLoaiSanPham"><i class="fa-solid fa-layer-group icon"></i> Quản lý loại sản phẩm</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLyKhuyenMai/DanhSachKhuyenMai"><i class="fa-solid fa-layer-group icon"></i> Quản lý Khuyến mãi</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLySanPhamKhuyenMai/DanhSachSanPhamKM"><i class="fa-solid fa-layer-group icon"></i> Quản lý sản phẩm k.mãi</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLyDonHang/DanhSachDonHang"><i class="fa-solid fa-briefcase icon"></i> Quản lý đơn hàng</a>
+            </li>
+            <li>
+                <a href="~/Admin/QuanLyNhaCungCap/DanhSachNhaCungCap"><i class="fa-solid fa-chart-area icon"></i> Quản lý nhà cung cấp</a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="content">
+        <nav>
+            <i class="bx bx-menu toggle-sidebar"></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Search..." />
+                    <i class="bx bx-search icon"></i>
+                </div>
+            </form>
+            <a href="#" class="nav-link">
+                <i class="bx bxs-bell icon"></i>
+                <span class="badge">5</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="bx bxs-message-square-dots icon"></i>
+                <span class="badge">8</span>
+            </a>
+            <span class="divider"></span>
+            <div class="profile">
+                @{
+                    var user = (WebsiteNongSan.Models.NguoiDung)Session["user"];
+                    <img src="~/Content/HinhAnh/@user.HinhAnh"
+                         alt="" />
+                }
+
+                <ul class="profile-link">
+                    <li>
+                        <a href="#"><i class="bx bxs-user-circle icon"></i> Hồ sơ</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="bx bxs-cog"></i> Cài đặt</a>
+                    </li>
+                    <li>
+                        <a href="~/NguoiDung/DangXuat"><i class="bx bxs-log-out-circle"></i> Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            @RenderBody()
+        </main>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="~/Content/plugin/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/plugin/ckfinder/ckfinder.js"></script>
+
+    <script src="~/Areas/Admin/Content/Assets/js/script.js"></script>
+
+    @RenderSection("DoanJS", false)
+</body>
+</html>

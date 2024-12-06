@@ -1,0 +1,305 @@
+﻿@model WebsiteNongSan.Models.SanPham
+
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<main class="container container-main" style="margin-top: var(--header-height); padding-left: 0; padding-right: 0">
+    <div class="row bg-white mb-2" style="padding: 12px 10px">
+        <div class="d-flex align-items-center">
+            <a href="~/SanPham/Index" style="text-decoration: none; font-size: 14px; color: #000">Trang chủ</a>
+            <span class="mx-2" style="font-size: 14px; color: #999">/</span>
+            <a href="~/SanPham/DanhSachSanPhamTheoLoai?id=@Model.IDLoaiSP" style="text-decoration: none; font-size: 14px; color: #000">@Model.LoaiSanPham.TenLoaiSP</a>
+            <span class="mx-2" style="font-size: 14px; color: #999">/</span>
+            <a href="" style="text-decoration: none; font-size: 14px; color: #999">@Model.TenSanPham</a>
+        </div>
+    </div>
+    <div class="row bg-white mb-2">
+        <div class="col-6 pl-0-t">
+            <div style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px">
+                <img style="object-fit: cover" src="~/Content/HinhAnh/@Model.HinhAnh" class="w-100 mx-auto d-block" alt="" />
+            </div>
+        </div>
+        <div class="col-6 pl-0-t">
+            <div class="p-3">
+                <p class="fw-500 fs-24-t">@Model.TenSanPham</p>
+                <div class="d-flex align-items-center">
+                    <p>Xuất xứ: <span style="color: #12487f">@Model.NhaCungCap.TenNhaCungCap</span></p>
+                    <p class="mx-2" style="color: #999">|</p>
+                    <p>Mã: <span style="color: #12487f">@Model.IDSanPham</span></p>
+                    <p class="mx-2" style="color: #999">|</p>
+                    <p>
+                        Tình trạng:
+                        @if (Model.TrangThai == true)
+                        {
+                            <span style="color: #12487f">Còn kinh doanh</span>
+                        }
+                        else
+                        {
+                            <span style="color: #12487f">Ngừng kinh doanh</span>
+                        }
+                    </p>
+                </div>
+                <hr />
+                <p class="text-red fw-700 fs-24-t">@String.Format("{0:0,0}", Model.Gia)<span class="fs-18-t">đ</span></p>
+                <div class="d-flex align-items-center">
+                    <div class="btn-group" style="border: 1px solid #ccc">
+                        <button href="" class="btn btn-outline-secondary" style="border: none">-</button>
+                        <input type="text"
+                               value="1"
+                               style="width: 60px; background-color: #e9ecef; text-align: center; border: none; border-left: 1px solid #ccc; border-right: 1px solid #ccc" />
+                        <button href="" class="btn btn-outline-secondary" style="border: none">+</button>
+                    </div>
+                </div>
+                <div style="margin-top: 26px; margin-bottom: 2px">
+                    <a href="~/DatHang/ThemVaoGioHang/@Model.IDSanPham" class="btn btn-Them fw-500" style="padding: 8px 18px; background-color: #ff505a; border: 1px solid #ff505a; color: white; font-weight: 700">THÊM VÀO GIỎ</a>
+                    <a href=""
+                       class="btn btn-ThanhToan fw-500"
+                       style="padding: 8px 18px; background-color: #ff505a; border: 1px solid #ff505a; color: white; font-weight: 700; margin-left: 2px">THANH TOÁN</a>
+                </div>
+                <div class="mt-4 p-3" style="background-color: #e9ecef">
+                    <p class="fs-16-t">Giao hàng đúng hẹn, nếu trễ tặng PGG 100.000đ</p>
+                    <p class="fs-16-t">Đổi, trả sản phẩm trong 48 giờ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mô tả sản phẩm -->
+    <div class="row bg-white mb-2 p-2">
+        <p class="fw-500 fs-24-t" style="padding: 10px; border-bottom: 1px solid #eaeaea">Mô tả sản phẩm</p>
+        <p>
+            @Html.Raw(Model.MoTa)
+        </p>
+    </div>
+    <!-- Sản phẩm cùng loại -->
+    <div class="row bg-white mb-2 card-detail">
+        <h5 class="text-center p-3 fs-24-t fw-500">SẢN PHẨM CÙNG LOẠI</h5>
+        <!-- Slick Carousel Wrapper -->
+        <div class="slick-carousel">
+            @foreach (var item in ViewBag.DanhSachSP)
+            {
+                <div class="product-item">
+                    <div class="card" style="border: none">
+                        <a href="~/SanPham/ChiTietSanPham/@item.IDSanPham">
+                            <img src="~/Content/HinhAnh/@item.HinhAnh" class="w-100" alt="" />
+                        </a>
+                        <div class="card-body" style="flex-grow: 1;">
+                            <p class="card-title fw-500 txt-gray" style="margin: 0; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; height: 45px; color: #000">@item.TenSanPham</p>
+                            <p class="card-title">
+                                <span class="fw-700" style="color: #a1001a">28.350đ</span>
+                                <span class="txt-gray fs-13-t">/300g</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="row mb-3" style="margin-right: -24px; margin-left: -11px">
+        <ul class="p-2 d-flex align-items-center mb-0" style="background-color: var(--bg-footer); margin-left: -12px">
+            <li class="text-white fs-14-t fw-500">bán 7:00 - 21:30</li>
+            <li class="mx-3">
+                <a href="" class="fw-700 text-white fs-14-t" style="text-decoration: none"><i class="ri-phone-line"></i> 19001908</a>
+            </li>
+            <li class="text-white fs-14-t fw-500">Khiếu nại 7:00 - 21:30</li>
+            <li class="mx-3">
+                <a href="" class="fw-700 text-white fs-14-t" style="text-decoration: none"><i class="ri-phone-line"></i> 18001067</a>
+            </li>
+            <li class="fw-700 fs-14-t fw-500" style="text-decoration: none; color: yellow; margin-left: 80px; margin-right: 20px">Cam kết:</li>
+            <li class="text-white fs-14-t fw-500"><i class="ri-checkbox-circle-line"></i> 15.000 sản phẩm</li>
+            <li class="text-white mx-3 fs-14-t fw-500"><i class="ri-checkbox-circle-line"></i> Freeship đơn 100k</li>
+            <li class="text-white fw-500 fs-14-t"><i class="ri-checkbox-circle-line"></i> Giao 2h</li>
+        </ul>
+
+        <div class="row bg-white pt-3">
+            <div class="col-6 d-flex justify-content-between">
+                <ul class="pl-0-t">
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Hướng dẫn mua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Tích điểm quà tặng VIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Cần thuê mặt bằng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Hỏi đáp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Tuyển 6542 việc</a>
+                    </li>
+                </ul>
+
+                <ul class="pl-0-t">
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Hóa đơn điện tử</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Giới thiệu công ty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Quy chế web</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">cảnh báo giả mạo</a>
+                    </li>
+                </ul>
+
+                <ul class="pl-0-t">
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Chính sách khách hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Chính sách giao hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Chính sách đổi trả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Trả góp, điện nước</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="text-dark nav-link pb-2 fs-15-t" style="text-decoration: none">Đăng ký chào hàng</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-1"></div>
+
+            <div class="col-5">
+                <div class="mb-2">
+                    <img src="~/Content/Assets/Images/checked.png" style="width: 20px" alt="" />
+                    <span>Cam kết chất lượng, không hài lòng trả hàng !</span>
+                </div>
+                <div class="mb-2">
+                    <img src="~/Content/Assets/Images/shipped.png" style="width: 20px" alt="" />
+                    <span>Giao hàng đúng hẹn, trễ tặng ngay 100.000đ</span>
+                </div>
+                <div class="mb-2">
+                    <a href=""><img src="~/Content/Assets/Icon/facebook.png" style="width: 20px" alt="" /></a>
+                    <a href=""><img src="~/Content/Assets/Icon/youtube.png" class="mx-1" style="width: 20px" alt="" /></a>
+                    <a href=""> <img src="~/Content/Assets/Icon/instagram.png" style="width: 20px" alt="" /></a>
+                </div>
+                <div>
+                    <img src="~/Content/Assets/Images/ggp-as.png" class="mx-auto d-block" style="width: 280px" alt="" />
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<style>
+    .card:hover {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+
+    .slick-carousel .product-item {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .detail .slick-arrow {
+        z-index: 1;
+        width: 44px !important;
+        height: 44px !important;
+        padding: 4px;
+        background-color: #f4f4f4;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        color: #717171;
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .slick-prev {
+        left: 0px;
+    }
+
+    .slick-next {
+        right: 0px;
+    }
+
+    .slick-prev:hover,
+     .slick-next:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+        .slick-prev::before,
+        .slick-next::before {
+            font-size: 18px !important;
+            color: #000;
+        }
+
+    .slide-menu {
+        display: none; /* Mặc định ẩn */
+        position: absolute;
+        top: 100%; /* Hiển thị ngay dưới menu */
+        left: 0;
+        background-color: #fff;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 100;
+    }
+
+    .bg-menu:hover .slide-menu {
+        display: block;
+    }
+
+    .bg-menu:hover .container-main {
+        background: #000 !important;
+    }
+
+    .btn-Them:hover,
+    .btn-ThanhToan:hover {
+        filter: brightness(1.5);
+    }
+
+
+</style>
+
+<script>
+    $(document).ready(function () {
+        $(".slick-carousel").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            infinite: true,
+            arrows: true, // Hiển thị mũi tên
+            dots: false, // Tắt dots
+            prevArrow: '<button type="button" class="slick-prev"><i class="ri-arrow-left-s-line"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="ri-arrow-right-s-line"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                    },
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    },
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
+        });
+    });
+</script>
+

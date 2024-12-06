@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebsiteNongSan.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "DanhSachNguoiDung";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h1 class="title">Quản lý người dùng</h1>
+<div style="display: flex; align-items: center; justify-content: space-between">
+    <ul class="breadcrumbs">
+        <li><a href="~/Admin/HomeAdmin/Index">Trang chủ</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Quản lý người dùng</a></li> 
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Danh sách người dùng</a></li>
+    </ul>
+</div>
+
+<div style="margin-top: 20px;">
+    <form action="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung" method="get" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Tìm kiếm -->
+            <input type="search" name="Search" value="@ViewBag.Search" placeholder="Nhập từ khóa..." style="padding: 8px 12px; width: 340px; border: 1px solid #cfcfcf; border-radius: 4px; height: 37px; box-sizing: border-box; font-size: 15px;" />
+
+            <!-- Sắp xếp theo Tên -->
+            <select name="SortName" style="padding: 6px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Lọc theo tên</option>
+                <option value="tentang" @(ViewBag.SortName == "tentang" ? "selected" : "")>Tên từ A-Z</option>
+                <option value="tengiam" @(ViewBag.SortName == "tengiam" ? "selected" : "")>Tên từ Z-A</option>
+            </select>
+
+            <!-- Lọc theo vai trò -->
+            <select name="FilterVaiTro" style="padding: 6px 12px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; height: 37px; font-size: 15px;">
+                <option value="">Lọc theo vai trò</option>
+                <option value="userFil" @(ViewBag.SortName == "user" ? "selected" : "")>User</option>
+                <option value="adminFil" @(ViewBag.SortName == "admin" ? "selected" : "")>Admin</option>
+            </select>
+
+            <!-- Lọc theo ngày -->
+            <div>
+                <span>Từ</span>
+                <input type="date" name="SortDate1" value="@ViewBag.SortDate1" style="padding: 6px 12px; height: 37px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; font-size: 15px;" />
+                <span>Đến</span>
+                <input type="date" name="SortDate2" value="@ViewBag.SortDate2" style="padding: 6px 12px; height: 37px; border: 1px solid #cfcfcf; cursor: pointer; border-radius: 4px; font-size: 15px;" />
+            </div>
+
+            <!-- Nút làm mới -->
+            <button type="submit" style="background-color: #1472ea; color: #557164; color:white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; height: 36px; cursor: pointer; ">
+                <i class="fa-solid fa-arrow-rotate-right" style="font-size: 13px;"></i>
+                <span style="font-weight: 500; margin-left: 6px;">Làm mới</span>
+            </button>
+        </div>
+
+        <!-- Nút thêm mới -->
+        <div>
+            <a href="~/Admin/QuanLyNguoiDung/ThemMoiNguoiDung" style="padding: 8px 16px; background-color: #1472ea; color: white; border-radius: 4px; font-size: 15px; height: 40px; text-decoration: none;">
+                <i class="fa-solid fa-plus"></i>
+                <span style="margin-left: 6px; font-weight: 500">Thêm mới</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="table-wrapper">
+            <table class="authors-table">
+                <thead>
+                    <tr style="background-color: #D3D3D3">
+                        <th style="color: #2d3436">Mã</th>
+                        <th style="color: #2d3436">Tên & Email</th>
+                        <th style="color: #2d3436">SĐT & Địa chỉ</th>
+                        <th style="color: #2d3436">Mật khẩu</th>
+                        <th style="color: #2d3436">Vai trò</th>
+                        <th style="color: #2d3436">Ngày đăng ký</th>
+                        <th style="color: #2d3436">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDNguoiDung</td>
+                            <td>
+                                <div class="author-info">
+                                    <img src="~/Content/HinhAnh/@item.HinhAnh" style="object-fit: cover" alt="John Michael" class="avatar" />
+                                    <div>
+                                        <h6>@item.TenNguoiDung</h6>
+                                        <small class="email">@item.Email</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="sdt">@item.SDT</p>
+                                <small class="address">@item.DiaChi</small>
+                            </td>
+                            <td>
+                                <small>@item.MatKhau</small>
+                            </td>
+                            <td>
+                                @if (@item.VaiTro == "User")
+                                {
+                                    <span class="badge user">@item.VaiTro</span>
+                                }
+                                else
+                                {
+                                    <span class="badge admin">@item.VaiTro</span>
+                                }
+                            </td>
+                            <td><small class="date">@String.Format("{0:dd/MM/yyyy}", item.NgayTao)</small></td>
+                            <td>
+                                <a href="~/Admin/QuanLyNguoiDung/CapNhatNguoiDung/@item.IDNguoiDung" class="edit-link"><i class="fa-solid fa-user-pen"></i></a>
+                                <a href="~/Admin/QuanLyNguoiDung/ChiTietNguoiDung/@item.IDNguoiDung" class="info-link"><i class="fa-solid fa-circle-info" style="font-size: 19px; color: #28a745"></i></a>
+                                <a href="~/Admin/QuanLyNguoiDung/XoaNguoiDung/@item.IDNguoiDung" class="delete-link"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Phân trang -->
+<div class="custom-pagination">
+    <a href="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=1" class="custom-button">&laquo;</a>
+    @for (int i = 1; i <= ViewBag.NoOfPages; i++)
+    {
+        var cssClass = i == ViewBag.Page ? "custom-button active" : "custom-button";
+        <a href="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@i" class="@cssClass">@i</a>
+    }
+    <a href="~/Admin/QuanLyNguoiDung/DanhSachNguoiDung?Search=@ViewBag.Search&SortName=@ViewBag.SortName&page=@ViewBag.NoOfPages" class="custom-button">&raquo;</a>
+</div>

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "ThongTinThanhToan";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<form action="~/DatHang/DatHang?id=@ViewBag.User.IDNguoiDung" method="post" class="container" style="margin-top: var(--header-height); padding-left: 0 !important; padding-right: 0 !important">
+    <div class="row">
+        <div class="col-7 bg-white" style="border-right: 1px solid #e0e0e0; padding: 28px 40px; min-height: 90vh; ">
+            <div class="col-12 mb-2">
+                <div class="d-flex align-items-center">
+                    <a href="" style="text-decoration: none">Giỏ hàng</a>
+                    <i class="ri-arrow-right-s-line" style="font-size: 20px; margin-bottom: -6px; color: #555"></i>
+                    <a href="" style="text-decoration: none; color: #333">Cung cấp thông tin giao hàng</a>
+                </div>
+            </div>
+
+            <!-- Thông tin giao hàng -->
+            <div class="col-12 bg-white mb-2 info">
+                <div>
+                    <p style="font-size: 22px">Thông tin giao hàng</p>
+                </div>
+                <input type="hidden" name="IDNguoiDung" value="@ViewBag.User.IDNguoiDung" />
+                <div style="height: 41px; border: 1px solid #e0e0e0; position: relative; padding: 8px; border-radius: 4px; margin-top: 16px; margin-bottom: 20px">
+                    <label for="" style="position: absolute; top: -10px; font-size: 13px; left: 10px; color: #777; background-color: white; padding: 0 4px">Họ và tên</label>
+                    <input type="text" name="TenNguoiDung" value="@ViewBag.User.TenNguoiDung" style="width: 100%; height: 100%; border: none; outline: none; padding-top: 4px" />
+                </div>
+                <div style="height: 41px; border: 1px solid #e0e0e0; position: relative; padding: 8px; border-radius: 4px; margin-top: 16px; margin-bottom: 20px">
+                    <label for="" style="position: absolute; top: -10px; font-size: 13px; left: 10px; color: #777; background-color: white; padding: 0 4px">Số điện thoại</label>
+                    <input type="text" name="SoDienThoai" value="@ViewBag.User.SDT" style="width: 100%; height: 100%; border: none; outline: none; padding-top: 4px" />
+                </div>
+                <div style="height: 41px; border: 1px solid #e0e0e0; position: relative; padding: 8px; border-radius: 4px; margin-top: 16px">
+                    <label for="" style="position: absolute; top: -10px; font-size: 13px; left: 10px; color: #777; background-color: white; padding: 0 4px">Địa chỉ nhận hàng</label>
+                    <input type="text" name="DiaChi" value="@ViewBag.User.DiaChi" style="width: 100%; height: 100%; border: none; outline: none; padding-top: 4px" />
+                </div>
+                <div style="height: 41px; border: 1px solid #e0e0e0; position: relative; padding: 8px; border-radius: 4px; margin-top: 16px">
+                    <label for="" style="position: absolute; top: -10px; font-size: 13px; left: 10px; color: #777; background-color: white; padding: 0 4px">Giờ giao hàng</label>
+                    <input type="datetime-local" name="GioGiaoHang" style="width: 100%; height: 100%; border: none; outline: none; padding-top: 4px" required />
+                </div>
+
+                <!-- Phương thức thanh toán -->
+                <div class="col-12 mb-2 mt-4">
+                    <p style="font-size: 22px">Chọn phương thức thanh toán</p>
+                    <div style="border: 1px solid #ccc; border-radius: 4px">
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ccc; padding: 14px">
+                            <input type="radio" id="cod" value="cod" name="inputThanhToan" required />
+                            <label for="cod" class="d-flex align-items-center">
+                                <img src="~/Content/Assets/Images/cash-on-delivery1.png" alt="" class="mx-2" />
+                                <span> Thanh toán khi giao hàng (COD) </span>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center" style="padding: 14px">
+                            <input type="radio" id="atm" value="atm" name="inputThanhToan" required />
+                            <label for="atm" class="d-flex align-items-center">
+                                <img src="~/Content/Assets/Images/atm-card1.png" alt="" class="mx-2" />
+                                <span>Thanh toán qua thẻ ngân hàng</span>
+                            </label>
+                        </div>
+                    </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div class="alert alert-danger">
+                                @ViewBag.Error
+                            </div>
+                        </div>
+                    }
+                    <div class="d-flex align-items-center justify-content-between mt-4">
+                        <a href="~/DatHang/XemGioHang" style="text-decoration: none">
+                            <i class="ri-arrow-left-s-line"></i>
+                            <span>Giỏ hàng</span>
+                        </a>
+                        <button type="submit" class="btn btn-primary" style="font-size: 17px">Hoàn tất đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5 bg-white" style="padding: 28px 40px">
+            <div class="col-12">
+                @foreach (var item in ViewBag.CartList)
+                {
+                    <div class="mt-3" style="border-bottom: 1px solid #e0e0e0">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <img src="~/Content/Assets/Images/@item.SanPham.HinhAnh" alt="" style="width: 64px; height: 64px; border: 1px solid #e0e0e0; border-radius: 4px" />
+                            <p>
+                                @(item.SanPham.TenSanPham.Length > 35 ? item.SanPham.TenSanPham.Substring(0, 35) + "..." : item.SanPham.TenSanPham)
+                            </p>
+                            <p style="font-size: 16px; font-weight: 500; text-align: right">@String.Format("{0:0,0}đ", item.SanPham.Gia)</p>
+                        </div>
+                    </div>
+                }
+
+                <div class="mt-3" style="border-bottom: 1px solid #e0e0e0">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <input type="text" placeholder="Mã giảm giá" style="width: 78%; padding: 10px; border-radius: 4px; border: 1px solid #e0e0e0; color: #717171" />
+                        <button type="submit" style="width: 20%; border: none; background-color: #e0e0e0; border: 1px solid #e0e0e0; padding: 10px; border-radius: 4px; margin-left: 5px">
+                            Nhập
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-3" style="border-bottom: 1px solid #e0e0e0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="mb-1" style="color: #333">Tổng tiền hàng</p>
+                        <p class="mb-1" style="color: #333">@String.Format("{0:0,0}đ", ViewBag.TongTien)</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p style="color: #333">Phí giao hàng</p>
+                        <p style="color: #333">---</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p style="color: #333; font-weight: 500; font-size: 18px">Tổng tiền thanh toán</p>
+                        <p style="color: #333; font-weight: 500">
+                            <span style="font-size: 22px">@String.Format("{0:0,0}", ViewBag.TongTien)</span>
+                            <span style="font-weight: 400">đ</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

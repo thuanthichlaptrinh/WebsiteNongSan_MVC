@@ -1,0 +1,186 @@
+﻿/* Basic Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    margin: 30px auto;
+}
+
+/* Card styling */
+.card {
+    /* border: 1px solid #ddd; */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card header */
+.card-header {
+    background-color: #ffffff;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+    .card-header h6 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+    }
+
+/* Table styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.authors-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+    .authors-table thead {
+        background-color: #ffffff;
+    }
+
+    .authors-table th,
+    .authors-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    .authors-table th {
+        color: black !important;
+        font-weight: 600;
+    }
+
+.tableProduct tr {
+    text-align: center;
+}
+/* Author info styling */
+.author-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.avatarProduct {
+    width: 60px;
+    height: auto;
+    margin-right: 12px;
+}
+
+.email {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Role and Address styling */
+.sdt {
+    margin: 0;
+    font-size: 14px;
+}
+
+.address {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Badge styling */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+.user {
+    background-color: #28a745;
+}
+
+.admin {
+    background-color: rgb(253, 186, 2);
+}
+
+/* Date styling */
+.date {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Edit link styling */
+.edit-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .edit-link:hover {
+        color: #004186;
+        transition: all 0.2s ease-in;
+    }
+/* delete link styling */
+.delete-link {
+    color: #b30303;
+    text-decoration: none;
+    font-size: 18px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .delete-link:hover {
+        color: #f00808;
+        transition: all 0.2s ease-in;
+    }
+
+    .delete-link:hover {
+        text-decoration: underline;
+    }
+
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .authors-table th, .authors-table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .authors-table {
+        font-size: 12px;
+    }
+
+    .edit-link {
+        font-size: 12px;
+    }
+
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+}
+
+
