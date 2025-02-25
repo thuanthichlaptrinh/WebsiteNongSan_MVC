@@ -1,7 +1,7 @@
 # Website mua bán nông sản - Thuận thích lập trình
 
 # Ảnh demo
-## 1. Trang người dùng
+## 1. Về phía người dùng
 - Trang chủ:
   ![image](https://github.com/user-attachments/assets/16c70fff-7388-41f2-8d08-84d9d3b4c996)
   ![image](https://github.com/user-attachments/assets/679c89a4-adf2-4567-93f9-92d60df084ba)
@@ -31,4 +31,24 @@
 - Trang đăng ký:
   ![image](https://github.com/user-attachments/assets/556d688d-4be2-44a7-bd3c-9de540091508)
 
-## 2. Trang Admin
+## 2. Về phía Admin
+### 2.1. Quản lí người dùng
+- Danh sách người dùng
+  ![image](https://github.com/user-attachments/assets/02c1d0fe-f3a0-4b55-adc5-867a68506d57)
+
+- Thêm người dùng:
+  ![image](https://github.com/user-attachments/assets/81feae11-3840-4a0d-96b4-633f764e65ad)
+
+- Chi tiết thông tin người dùng:
+  ![image](https://github.com/user-attachments/assets/2c661a5c-87bc-4bd7-be63-ce969e66775e)
+
+- Cập nhật thông tin người dùng:
+  ![image](https://github.com/user-attachments/assets/1e1fb317-157c-49bf-b36f-2c234271aa6f)
+
+- Xóa người dùng
+  ![image](https://github.com/user-attachments/assets/f97d230f-9880-43bb-a1f2-8dc1f083074e)
+
+### 2.2. Quản lí sản phẩm
+
+
+...
