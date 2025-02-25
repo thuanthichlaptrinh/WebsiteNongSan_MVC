@@ -34,6 +34,8 @@
 - Trang đăng ký:
   ![image](https://github.com/user-attachments/assets/556d688d-4be2-44a7-bd3c-9de540091508)
 
+...
+
 ## 2. Về phía Admin
 ### 2.1. Quản lí người dùng
 - Danh sách người dùng
