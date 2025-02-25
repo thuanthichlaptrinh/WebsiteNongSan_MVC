@@ -13,6 +13,9 @@
   ![image](https://github.com/user-attachments/assets/ae6e87f8-2cf1-4848-a89d-1a86d94dda55)
   ![image](https://github.com/user-attachments/assets/049bf9de-f458-4bf4-a1b5-b20b708bef7c)
 
+- Giỏ hàng:
+  ![image](https://github.com/user-attachments/assets/43141160-6b7e-4549-bfdb-31e29dea47b2)
+
 - Đơn hàng người dùng:
   ![image](https://github.com/user-attachments/assets/4f59659f-5a76-4a79-82d5-fefaf741f425)
 
