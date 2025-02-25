@@ -32,9 +32,9 @@
   ![image](https://github.com/user-attachments/assets/556d688d-4be2-44a7-bd3c-9de540091508)
 
 ## 2. Về phía Admin
-### 2.1. Quản lí sản phẩm
-### 2.2. Quản lí người dùng
+### 2.1. Quản lí người dùng
 - Danh sách người dùng
+  ![z6352381504515_31958a05c85ea4b6b86e5e296b6ca870](https://github.com/user-attachments/assets/912dae8d-e013-4ef1-876f-bb770ae0f86c)
   
 - Thêm người dùng:
   ![image](https://github.com/user-attachments/assets/81feae11-3840-4a0d-96b4-633f764e65ad)
@@ -47,8 +47,13 @@
 
 - Xóa người dùng
   ![image](https://github.com/user-attachments/assets/f97d230f-9880-43bb-a1f2-8dc1f083074e)
+  
+### 2.2. Quản lí sản phẩm
+- Danh sách sản phẩm
+  ![image](https://github.com/user-attachments/assets/35a657e0-d803-4ae0-a33b-c698cfb98b4a)
+...
 
-### 2.3. Quản lí sản phẩm
+### 2.3. Quản lí sản phẩm khuyến mãi
 
 
 ...
