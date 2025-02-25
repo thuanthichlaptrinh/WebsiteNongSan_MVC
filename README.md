@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/cacf1476-d5f4-46db-b821-e3a7b4b09a7d)![image](https://github.com/user-attachments/assets/f19da1f7-69c3-4d86-b591-72806ebe5759)# Website mua bán nông sản - Thuận thích lập trình
+# Website mua bán nông sản - Thuận thích lập trình
 
 # Ảnh demo
 ## 1. Trang người dùng
