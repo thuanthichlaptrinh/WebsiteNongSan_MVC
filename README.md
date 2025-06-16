@@ -1,4 +1,4 @@
-# Website mua bán nông sản - Thuận thích lập trình
+# Xây dựng website bán nông sản
 
 # Ảnh demo
 ## 1. Về phía người dùng
